@@ -1,0 +1,109 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; 
+} 
+body{
+  min-height: 100vh;
+  width: 100%;
+} 
+
+.container .grid-list{
+    padding-top: 80px;
+}
+
+/*RESPONSIVE MEDIAS*/
+
+/* For mobile phones: */
+@media (max-width: 575px) {
+
+  /*footer*/
+  .footer-brand .logo{
+    margin-left: 20px;
+  }
+  .footer-text{
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .social-list{
+    margin-left: 20px;
+    font-size: 15px;
+  } 
+  .footer-list .footer-list-title{
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .footer-list .footer-link{
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  /*navbar*/
+   /*have to do little adjustments to navbar in mobile view*/
+   .navbar-list .navbar-link{
+    font-size: 10px;
+    margin-left: 10px;
+  }
+   /*text search our store in search bar*/
+   .navbar-top .input-field{
+      font-size: 13px;
+  }
+  .navbar-top {
+    margin-top: 10px;
+    margin-left: 0;
+    margin-right: 0;
+    
+  }
+  /*grid-list update*/
+  .container .grid-list .product-card{
+    padding: 40px;
+  }
+}
+
+/*tablet view, works until 768px*/
+@media (max-width: 768px) {  /*max width is 768px*/
+   /*navbar*/
+   /*have to do little adjustments to navbar in mobile view*/
+   .navbar-list .navbar-link{
+    font-size: 15px;
+    margin-left: 10px;
+  }
+   /*text search our store in search bar*/
+   .navbar-top .input-field{
+      font-size: 13px;
+  }
+  .navbar-top {
+    margin-top: 0;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+  
+  /*footer*/
+  .footer-list{
+    padding-top: 30px;
+  }
+  .footer-brand .logo{
+    margin-left: 20px;
+  }
+  .footer-text{
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .social-list{
+    margin-left: 20px;
+    font-size: 15px;
+  } 
+  .footer-list .footer-list-title{
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .footer-list .footer-link{
+    margin-left: 20px;
+    font-size: 15px;
+  }
+
+}
+
+
