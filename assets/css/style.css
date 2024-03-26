@@ -818,12 +818,13 @@ Also search bar is in this included as well */
     /*footer*/
     
       .footer-text{
-        margin-left: 20px;
-        font-size: 10px;
+        /*margin-left: 10px;*/
+        font-size: 15px;
       }
       .social-list{
-        margin-left: 20px;
+        
         font-size: 15px;
+     
       } 
       .footer-list{
         margin: 0;

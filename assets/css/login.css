@@ -7,7 +7,7 @@
   font-family: 'Poppins', sans-serif;
 }
 body{
-  min-height: 100vh;
+  min-height: 100vh; 
   width: 100%;
 }
 .container{
@@ -32,6 +32,7 @@ body{
 }
 #check{
   display: none;
+  color: black;
 }
 .container .form{
   padding: 2rem;
@@ -99,31 +100,20 @@ body{
   font-size: 17px;
   text-align: center;
   color: black;
+  margin-top: 10px; 
 }
 /*Sign up text*/
 .signup label{
   color: hsl(184, 50%, 60%);
   cursor: pointer;
+  display: inline-block;
+  margin-left: 5px; 
+
 }
 /*kada hoveramo na Sign up text, underline*/
 .signup label:hover{
   text-decoration: underline;
-}
 
-/*go back to home page button*/
-.back-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  text-decoration: none;
-  color: black;
-  display: flex;
-  align-items: center;
-}
-
-.back-btn ion-icon {
-  margin-right: 5px;
-  color: black;
 }
 
 /*back button ikonica*/
@@ -141,4 +131,286 @@ body{
   align-items: center; 
   justify-content: center; 
   text-decoration: none; 
+}
+
+/*back button ikonica kada hoveramo*/
+.close-container{
+  position:fixed;
+  right: 20px; /* Adjust the value as needed */
+  width: 50px;
+  height: 50px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+
+.leftright{
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  margin-top: 24px;
+  background-color: aqua;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.rightleft{
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  margin-top: 24px;
+  background-color: aqua;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+
+.close-container label{
+  color: white;
+  font-family: Helvetica, Arial, sans-serif; 
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all .3s ease-in;
+  opacity: 0;
+}
+.close{
+  margin: 60px 0 0 5px;
+  position: absolute;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: red;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: red;
+}
+.close-container:hover label{
+  opacity: 1;
+}
+
+/*MEDIA QUERIES*/
+/*@media (max-width: 375px) {
+  .container {
+    max-width: 200px;
+    width: 100%;
+    border-radius: 15px;
+    align-items: center;
+    margin: 10px;
+    margin-right: 10px;
+  
+  }
+  .container .form{
+    align-items: center;
+    margin: 20px
+  }
+  
+  .form header {
+    font-size: 60px;
+    margin-bottom: 0.8rem;
+  }
+  .form input {
+    height: 45px;
+    font-size: 13px;
+    margin-bottom: 0.8rem;
+    padding: 20px;
+  }
+  .form input.button {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  .signup {
+    font-size: 14px;
+  }
+  .close-container {
+    right: 5px;
+    padding-right: 10px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+  }
+  .leftright, .rightleft {
+    width: 20px;
+    margin-top: 12px;
+  }
+  .close {
+    margin: 25px 0 0 3px;
+  }
+  .form header{
+    font-size: 15px;
+  }
+  
+}*/
+
+
+
+/* For tablets and smaller desktops */
+/*@media (max-width: 768px) {
+  .container {
+    max-width: 350px;
+    border-radius: 20px;
+  }
+  .form header {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .form input {
+    height: 50px;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+  .form input.button {
+    font-size: 1rem;
+    margin-top: 1.2rem;
+  }
+  .signup {
+    font-size: 15px;
+  }
+  .close-container {
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .leftright, .rightleft {
+    width: 40px;
+    margin-top: 20px;
+  }
+  .close {
+    margin: 45px 0 0 4px;
+  }
+}*/
+
+
+/*MEDIA QUERIES*/
+@media (max-width: 768px) {
+  .container {
+    max-width: 350px;
+    border-radius: 20px;
+  }
+  .form header {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .form input {
+    height: 50px;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+  .form input.button {
+    font-size: 1rem;
+    margin-top: 1.2rem;
+  }
+  .signup {
+    font-size: 15px;
+  }
+  .close-container {
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .leftright, .rightleft {
+    width: 40px;
+    margin-top: 20px;
+  }
+  .close {
+    margin: 45px 0 0 4px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 300px;
+    border-radius: 15px;
+  }
+  .form header {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+  .form input {
+    height: 45px;
+    font-size: 13px;
+    margin-bottom: 0.8rem;
+    padding: 20px;
+  }
+  .form input.button {
+    font-size: 0.9rem
+    ;
+    margin-top: 1rem;
+  }
+  .signup {
+    font-size: 14px;
+  }
+  .close-container {
+    right: 5px;
+    padding-right: 10px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+  }
+  .leftright, .rightleft {
+    width: 20px;
+    margin-top: 12px;
+  }
+  .close {
+    margin: 25px 0 0 3px;
+  }
+  .form header{
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .container {
+    max-width: 200px;
+    width: 100%;
+    border-radius: 15px;
+    align-items: center;
+    margin: 10px;
+    margin-right: 10px;
+  
+  }
+  .container .form{
+    align-items: center;
+    margin: 20px
+  }
+  
+  .form header {
+    font-size: 60px;
+    margin-bottom: 0.8rem;
+  }
+  .form input {
+    height: 45px;
+    font-size: 13px;
+    margin-bottom: 0.8rem;
+    padding: 20px;
+  }
+  .form input.button {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  .signup {
+    font-size: 14px;
+  }
+  .close-container {
+    right: 5px;
+    padding-right: 10px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+  }
+  .leftright, .rightleft {
+    width: 20px;
+    margin-top: 12px;
+  }
+  .close {
+    margin: 25px 0 0 3px;
+  }
+  .form header{
+    font-size: 15px;
+  }
+  
 }
