@@ -1,0 +1,198 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "Black Night",
+            "author": "John Doe",
+            "price": "80.00",
+            "image": "./assets/images/book-1.png",
+            "stars": [true, true, true, true, true],
+            "description": "Black Night is a thrilling mystery novel that takes readers on a suspenseful journey through the dark alleys of a city plagued by crime. Set against the backdrop of a gritty urban landscape, the story follows Detective John Black as he navigates the dangerous underworld in search of a notorious serial killer. As Black delves deeper into the case, he uncovers a web of secrets and deceit that lead him to question everything he thought he knew. With its gripping plot twists and complex characters, 'Black Night' is a captivating read that will keep you on the edge of your seat until the very end."
+
+        },
+        {
+            "id": 2,
+            "title": "Graphic Design School",
+            "author": "John Doe",
+            "price": "50.00",
+            "image": "./assets/images/book-13.png",
+            "stars": [true, true, true, false, false],
+            "description": "'Graphic Design School' is a comprehensive guide that serves as a fundamental resource for both aspiring and practicing designers. Covering a wide range of topics, from basic design principles to advanced techniques, this book offers practical advice and insights into the world of graphic design. With its clear and concise explanations, accompanied by vibrant illustrations and examples, 'Graphic Design School' provides readers with the tools they need to develop their skills and create compelling visual communications. Whether you're a beginner looking to learn the basics or a seasoned professional, this book is an essential addition to any designer's library."
+
+
+        }, 
+        {
+            "id": 3,
+            "title": "About The First Night",
+            "author": "John Doe",
+            "price": "70.00",
+            "image": "./assets/images/book-2.png",
+            "stars": [true, true, true, false, false],
+            "description":"About The First Night is a heartwarming tale that explores the magic and mystery of new beginnings. Set in a small town where everyone knows everyone else's business, the story follows a group of neighbors as they come together to celebrate the first night of the new year. As the night unfolds, secrets are revealed, friendships are tested, and unexpected romances blossom. With its charming characters and poignant moments, 'About The First Night' is a delightful read that reminds us of the power of community, love, and second chances."
+
+        },
+        {
+            "id": 4,
+            "title": "Open The Sky",
+            "author": "John Doe",
+            "price": "90.55",
+            "image": "./assets/images/book-3.png",
+            "stars": [true, true, true, false, false],
+            "description":"Open The Sky is a captivating novel that delves into the complexities of human relationships and the search for meaning in life. Set against the backdrop of a small, close-knit community, the story follows protagonist Sarah as she navigates the challenges of love, loss, and self-discovery. When a mysterious stranger arrives in town, Sarah's world is turned upside down, forcing her to confront her past and reconsider her future. With its richly drawn characters and evocative prose. It is a poignant and thought-provoking exploration of the human condition and the universal desire for connection and understanding."
+
+        },
+        {
+            "id": 5,
+            "title": "Book Hardcover",
+            "author": "John Doe",
+            "price": "20.00",
+            "image": "./assets/images/book-4.png",
+            "stars": [true, true, true, false, false],
+            "description":"Hardcover is a gripping thriller that takes readers on a rollercoaster ride of suspense and intrigue. Set in the high-stakes world of international espionage, the story follows ex-CIA agent Jack Harper as he is reluctantly pulled back into the field for one last mission. As Jack races against time to unravel a deadly conspiracy, he must confront his own demons and make impossible choices that will determine the fate of nations. With its fast-paced plot, complex characters, and unexpected twists. It is a pulse-pounding read that will keep you on the edge of your seat until the final page."
+
+        },
+        {
+            "id": 6,
+            "title": "The Big Book About Science",
+            "author": "John Doe",
+            "price": "60.00",
+            "image": "./assets/images/book-5.png",
+            "stars": [true, true, true, true, false],
+            "description":"The Big Book About Science is an expansive and engaging exploration of the wonders of the scientific world. This comprehensive tome covers a wide array of scientific disciplines, from physics and chemistry to biology and astronomy. Through accessible language and vivid illustrations, readers are taken on a journey through the fundamental principles that govern our universe. Whether you're a curious beginner or a seasoned enthusiast. It  offers a fascinating look into the beauty and complexity of the natural world."
+
+        },
+        {
+            "id": 7,
+            "title": "By The Air",
+            "author": "John Doe",
+            "price": "29.99",
+            "image": "./assets/images/book-6.png",
+            "stars": [true, true, true, false, false],
+            "description":"By the Air is an enchanting novel that transports readers to a world where the skies are filled with adventure and mystery. Set in a fantastical realm where airships rule the skies, the story follows a daring young pilot named Amelia as she embarks on a perilous journey to uncover the truth about her past. Along the way, Amelia encounters a cast of colorful characters, battles fierce enemies, and discovers that the key to her destiny lies in the clouds above. With its breathtaking aerial escapades and heartfelt storytelling, By the Air is a soaring adventure that will capture the imagination of readers of all ages."
+        },
+        {
+            "id": 8,
+            "title": "Murdering Last Year",
+            "author": "John Doe",
+            "price": "43.00",
+            "image": "./assets/images/book-7.png",
+            "stars": [true, true, true, false, false],
+            "description":"Murdering Last Year is a gripping thriller that unravels the dark secrets of a seemingly idyllic town. When a series of murders shakes the community to its core, Detective Sarah Lawson is called in to investigate. As Sarah delves deeper into the case, she uncovers a web of lies, betrayal, and long-buried secrets that lead her to question everything she thought she knew about the town and its inhabitants. With its twists and turns, Murdering Last Year keeps readers on the edge of their seats until the final, shocking revelation."
+        },
+        {
+            "id": 9,
+            "title": "Welcome To Space",
+            "author": "John Doe",
+            "price": "80.00",
+            "image": "./assets/images/book-10.png",
+            "stars": [true, true, true, false, false],
+            "description":"Welcome To Space is a captivating science fiction novel that invites readers on an epic journey to the far reaches of the universe. Set in a future where space travel is commonplace, the story follows a group of intrepid explorers as they embark on a mission to explore a distant star system. As they traverse the vastness of space, they encounter strange new worlds, alien civilizations, and unimaginable wonders. With its thrilling adventures and thought-provoking themes, Welcome To Space is a must-read for anyone who has ever looked up at the stars and wondered what lies beyond."
+        },
+        {
+            "id": 10,
+            "title": "Self Care",
+            "author": "John Doe",
+            "price": "100.00",
+            "image": "./assets/images/book-9.png",
+            "stars": [true, true, true, false, false],
+            "description":"Self-care is an essential practice for maintaining your physical, mental, and emotional well-being. It involves taking deliberate actions to care for yourself, prioritize your needs, and reduce stress. This can include activities such as exercise, meditation, spending time in nature, or engaging in hobbies that bring you joy. By practicing self-care regularly, you can improve your overall quality of life, enhance your resilience to stress, and cultivate a greater sense of balance and fulfillment."
+        },
+        {
+            "id": 11,
+            "title": "Every Thing You Never",
+            "author": "John Doe",
+            "price": "35.00",
+            "image": "./assets/images/book-12.png",
+            "stars": [true, true, true, false, false],
+            "description":"Every Thing You Never is a poignant exploration of life's unanswered questions and the complexities of human relationships. Through a series of interconnected stories, the novel delves into the lives of its characters, revealing their deepest desires, fears, and regrets. As the narratives intertwine, a portrait of the human experience emerges, highlighting the universal themes of love, loss, and the search for meaning. Every Thing You Never is a thought-provoking and deeply moving work that reminds us of the beauty and fragility of life"
+        },
+        {
+            "id": 12,
+            "title": "Moonson",
+            "author": "John Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false]
+        },
+        {
+            "id": 13,
+            "title": "Moonson",
+            "author": "John Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+        },
+        {
+            "id": 14,
+            "title": "Moonson",
+            "author": "John Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        },
+        {
+            "id": 15,
+            "title": "Moonson",
+            "author": "John Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        },
+        {
+            "id": 16,
+            "title": "Moonson",
+            "author": "John Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        },
+        {
+            "id": 17,
+            "title": "Moonson",
+            "author": "John Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        },
+        {
+            "id": 18,
+            "title": "Moonson",
+            "author": "hailey Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        },
+        {
+            "id": 19,
+            "title": "Moonson",
+            "author": "hailey Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        },
+        {
+            "id": 20,
+            "title": "Moonson",
+            "author": "hailey Doe",
+            "price": "120.00",
+            "image": "./assets/images/book-11.png",
+            "stars": [true, true, true, false, false],
+            "description":"Monsoon is a vivid portrayal of nature's power and beauty, set against the backdrop of a tropical storm. As the rain falls in torrents and the wind howls through the trees, the characters in the novel are forced to confront their innermost fears and desires. Through the lens of the monsoon, the novel explores themes of renewal, rebirth, and the unstoppable force of nature. With its lush descriptions and evocative imagery, Monsoon is a mesmerizing read that will transport you to another world."
+
+        }
+    
+    ]
+}

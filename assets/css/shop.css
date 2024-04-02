@@ -15,8 +15,300 @@ body{
     padding-top: 80px;
 }
 
-/*RESPONSIVE MEDIAS*/
+/*novo za sorting*/
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+/*******************************************************+****/
+.blur-background {
+  filter: blur(8px);
+}
+
+
+/* Modal container */
+.modal {
+  display: none; /* hidden initially*/
+  position: fixed; 
+  z-index: 1000; 
+  left: 0;
+  top: 5%;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; /*scroll omogućen po potrebi*/
+}/* Show the modal */
+.modal.active {
+  display: block;
+}
+
+/*Text inside the modal*/
+.modal-content {
+  background-color:  hsl(243, 95%, 8%);
+  margin: 5% auto; 
+  padding: 10px;
+  border: 2px solid #888;
+  position: relative;
+  width: 60%; 
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3); 
+  animation: animatezoom 0.6s;
+
+}
+
+.modal-book-title{
+  color: white;
+  font-size: 37px;
+  font-weight: bold;
+  text-align:center;
+  position: absolute; 
+  top: 77px; /*pomjeriti title slike prema gore*/
+  left: 40%; /* za centriranje horizontalno */
+}
+
+.modal-book-author{
+  color: white;
+  font-size: 20px;
+  text-align: left;
+  position: absolute; 
+  top: 150px; /*pomjeriti title slike prema gore*/
+  left: 40%; /* za centriranje horizontalno */
+
+}
+
+.modal-book-price{
+  color: red;
+  font-size: 30px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+  text-align: right;
+  position: absolute; 
+  top: 180px; 
+  right: 5%; 
+}
+
+.modal-book-stars{
+  color: yellow;
+  font-size: 20px;
+  text-align:right;
+  position: absolute; 
+  top: 190px;  /*razmak zvijezdica od autora*/
+  left: 40%; 
+  display: flex; 
+  justify-content: center; 
+
+
+}
+
+.modal-book-stars span {
+  margin: 0 10px; /*razmak između zvijezdica*/
+  padding: 10px;
+}
+
+.modal-content hr{
+  border-top: 0px solid gray;
+  margin-top: 10px;
+  margin: 0 auto; 
+  width: 55%;
+  position: absolute;
+  top: 220px; 
+  left: 40%; 
+}
+/*Description tekst*/
+.modal-book-description-title {
+  color: grey;
+  font-size: 13px;
+  font-weight: normal;
+  text-align: justify;
+  top: 230px; 
+  width: 60%;
+  left: 40%;
+  position: absolute;
+}
+
+
+.modal-book-description{
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: justify;
+  margin-top: 10px;
+  padding: 0 20px;
+  position: absolute;
+  top: 240px; 
+  width: 60%;
+  left: 38%; 
+
+}
+
+
+/*x close button*/
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+}
+
+.close:hover,
+.close:focus {
+  color: aqua;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.favorite-popup {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: aqua;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 60px;
+  z-index: 20;
+  font-weight: bold;
+}
+
+
+/*ovo sve je za user ikonicu opet, jer nije radilo :(( */
+.user-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-action-btn {
+  display: flex;
+  align-items: center;
+  color: white; 
+  text-decoration: none;
+  visibility: visible; 
+}
+
+.header-action-btn ion-icon {
+  font-size: 24px; 
+  margin-right: 8px;
+}
+
+.login-text {
+  font-size: 16px; 
+}
+
+
+
+/*Sort button implementation*/
+.sort-container {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  top: 200px;  /*pozicija ovog sorta boze dragi*/
+  right: 170px;
+  gap: 10px;
+
+}
+/*sort by text*/
+.sort-container label {
+  margin-left: 200px;
+  padding: 10px 0;
+  color: aqua;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: right;
+  margin-top: -100px;
+  
+}
+
+/*sort by dropdown*/
+.custom-select {
+  position: relative;
+  background-color: #ffffff; 
+  border: 1px solid #ccc; 
+  border-radius: 30px; 
+  cursor: pointer;
+  user-select: none;
+  width: 90px;
+  height: 30px;
+  margin-top: -65px;
+
+}
+
+.custom-select-value {
+  /*padding: 8px;*/
+  padding-top: 3px;
+  align-items: center;
+  text-align: center;
+  margin-right: 10px;
+  color: black;
+}
+
+.custom-select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: aqua;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.custom-select-option {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.custom-arrow {
+  position: absolute;
+  right: 10px;
+  left: 58px;
+  padding: 10px;
+  top: 55%;
+  font-weight: bold;
+  transform: translateY(-50%);
+  color: black;
+  cursor: pointer;
+}
+
+
+
+
+
+/*RESPONSIVE MEDIAS*/
 /* For mobile phones: */
 @media (max-width: 575px) {
 
@@ -56,11 +348,47 @@ body{
     margin-right: 0;
     
   }
+  .container .grid-list{
+    padding: 100px;
+  }
   /*grid-list update*/
   .container .grid-list .product-card{
     padding: 40px;
   }
+
+  .sort-container {
+    position:relative; /* Use absolute for positioning relative to parent */
+    top: auto; /* Reset any previously set top value */
+    right: 100px; /* 5px from the right */
+    margin-top: 20px; /* Adjust as needed */
+    font-size: 12px;
+    align-items: center;
+    justify-content: right;
+    
+  }
+  .custom-select-wrapper{
+    width: 100px; /* Slightly reduce width */
+    padding: 100px;
+    margin-top: -100px;
+
+  }
+
+  .custom-select {
+    width: 80px; /* Slightly reduce width */
+    height: 25px; /* Reduce height for smaller screens */
+  }
+
+  .custom-arrow {
+    left: auto;
+    right: 5px; /* Adjust arrow position */
+  }
+
+  .custom-select-value {
+    padding-top: 2px; /* Adjust vertical alignment if needed */
+  }
 }
+
+
 
 /*tablet view, works until 768px*/
 @media (max-width: 768px) {  /*max width is 768px*/

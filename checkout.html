@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BookLet</title>
+
+
+  <!-- - favicon  -->
+  <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- - custom css link -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/checkout.css">
+
+
+  <!--google font Aldijana-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+  <!-- preload image-->
+  <link rel="preload" as="image" href="/assets/images/hero-bg.jpg">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+
+ 
+
+<body id="top">
+
+  <!-- #HEADER-->
+  <header class="header" data-header>
+    <div class="header-top">
+      <div class="container">   <!--using same container everywhere-->
+
+        <!--LOGO-->
+        <a href="#" class="logo">
+          <img src="./assets/images/logo (1).png" alt="booken home"> 
+        </a>
+
+        <!--Search button-->
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search our store" class="input-field">
+          <button class="btn btn-primary">Search</button>
+        </div>
+
+        <!--Cart icon action in header-->
+        <div class="header-action">
+          <button class="header-action-btn" title="Cart" onclick="redirectToCart()">
+            <span class="span">0</span> <!--currently 0 element in cart-->
+            <ion-icon name="bag-handle-outline"></ion-icon>
+          </button>
+
+          <!--icon used for when in mobile view -->
+          <button class="nav-open-btn"  title="Open Menu" data-nav-toggler>
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+
+          <!--User icon-->
+          <div class="dropdown-content" id="dropdownContent">
+            <a href="login.html" class="header-action-btn"  title="User">
+              <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+              <span class="login-text">Login</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <main>
+       
+
+          
+    </main>
+
+
+
+
+
+
+  <!--Importing JS -->
+  <script src="./assets/js/script.js"></script>
+
+
+  <!---- ionicon link  - for icons used in navbar -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+      <form action="/action_page.php">
+      
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" id="city" name="city" placeholder="New York">
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY">
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="10001">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2024">
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352">
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="submit" value="Continue to checkout" class="btn">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

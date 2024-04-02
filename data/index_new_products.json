@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Welcome to Space",
+        "price": "49.99",
+        "image": "./assets/images/book-10.png",
+        "stars": [true, true, true, false, false]
+    },
+    {
+        "title": "Graphic Design School",
+        "price": "100.00",
+        "image": "./assets/images/book-13.png",
+        "stars": [true, true, true, true, false]
+    },
+    {
+        "title": "Murdering Last Year",
+        "price": "25.99",
+        "image": "./assets/images/book-7.png",
+        "stars": [true, true, true, true, false]
+    },
+    {
+        "title": "By The Air",
+        "price": "19.99",
+        "image": "./assets/images/book-6.png",
+        "stars": [true, true, true, true, true]
+    }
+   
+]

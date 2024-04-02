@@ -1,164 +1,277 @@
-.cart-component .card {
-    margin: auto;
-    max-width: 950px;
-    width: 90%;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 1rem;
-    border: transparent;
+.cart-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 100px;
 }
-.cart-component .title {
-    margin-bottom: 5vh;
+  
+.cart-container {
+    width: 85%;
+    margin-top:70px;
 }
-.cart-component .cart {
-    background-color: #fff;
-    padding: 4vh 5vh;
-    border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem;
+  
+.cart-items {
+    /*background: #736262;*/
+    border: 1px solid #f8f3f3;
+    border-radius: 4px;
+    margin-top: 0;   
+    padding: 4px;
 }
-.cart-component .summary {
-    background-color: #ddd;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    padding: 4vh;
-    color: rgb(65, 65, 65);
+  
+/*za svaki item u korpi*/
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #E1E1E1;
 }
-/* Add the rest of your CSS with the .cart-component prefix */
-
-
-
-
-
-
-@media(max-width:767px){
-    .card{
-        margin: 3vh auto;
-    }
+/*ne znam za ovo */
+.header-item,
+.header-unit-price,
+.header-quantity,
+.header-final-price,
+.header-remove {
+  flex-grow: 1;
+  text-align: center;
 }
-.cart{
-    background-color: #fff;
-    padding: 4vh 5vh;
-    border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem;
+/*Item, unit price NASLOVI*/
+.cart-headers {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #E1E1E1;
 }
 
-
-
-
-
-@media(max-width:767px){
-    .cart{
-        padding: 4vh;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 1rem;
-    }
+/*Image of the book*/
+.item-description {
+    display: flex;
+    align-items: center;
 }
-.summary{
-    background-color: #ddd;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    padding: 4vh;
-    color: rgb(65, 65, 65);
+  
+.item-description img {
+    width: 150px; 
+    height: 180px;
+    margin-right: 10px;
 }
-@media(max-width:767px){
-    .summary{
-    border-top-right-radius: unset;
-    border-bottom-left-radius: 1rem;
-    }
+/*author and title of the book*/
+.text-description {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px; 
 }
-.summary .col-2{
-    padding: 0;
-}
-.summary .col-10
-{
-    padding: 0;
-}.row{
+
+/*Title and author of the book*/
+.title {
+    font-size: 20px; 
     margin: 0;
+    font-weight: bold; 
 }
-.title b{
-    font-size: 1.5rem;
-}
-.main{
+  
+.author {
+    font-size: 0.8em; 
     margin: 0;
-    padding: 2vh 0;
-    width: 100%;
+    color: #f0f0f0; 
+    font-style: emphasize;
+    letter-spacing: 2px; 
 }
-.col-2, .col{
-    padding: 0 1vh;
+
+.unit-price {
+    font-size: 20px;
+    color: #f0f0f0; 
+    font-weight: bold;
+    margin-right: 10px;
+    padding-left: 70px; 
+    align-items: center;
+  }
+  
+/*Quantity buttons*/
+.quantity-selector {
+    display: flex;
+    align-items: center;
 }
-a{
-    padding: 0 1vh;
+  
+.quantity-selector button {
+    border: none;
+    /*background-color: #be5252;*/
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 30px;
 }
-.close{
-    margin-left: auto;
-    font-size: 0.7rem;
+  
+.quantity-selector input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    margin: 0 5px;
+    border-radius: 30px;
+    border: 1px solid aqua;
 }
-img{
-    width: 3.5rem;
+  
+/*final price*/
+.final-price{
+    font-size: 20px;
+    color: #f0f0f0; 
+    font-weight: bold;
+    margin-right: 10px;
+    align-items: center;
+
 }
-.back-to-shop{
-    margin-top: 4.5rem;
+
+/*remove button*/
+.remove-item {
+    width: 50px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-right: 20px;
+    padding-right: 20px;
 }
-h5{
-    margin-top: 4vh;
+.remove-item:hover {
+    color: aqua;
 }
-hr{
-    margin-top: 1.25rem;
+ /*item, unit price, quantity, final price, remove*/
+.header-item{
+    left: 70px;
+    text-align: right;
+    flex-basis: 13%; 
+    margin-left: 30px;
 }
-form{
-    padding: 2vh 0;
+.header-unit-price{
+    left: 70px;
+    text-align: right;
+    margin-left: 30px;
+    flex-basis: 10%; 
 }
-select{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1.5vh 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
+
+.header-quantity{
+    left: 70px;
+    text-align: right;
+    margin-left: 60px;
+    padding-left: 10px;
+
 }
-input{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
+.header-final-price{
+    left: 80px;
+    padding-left: 40px;
+    text-align: right;
+    margin-right: 25px;
 }
-input:focus::-webkit-input-placeholder
-{
-      color:transparent;
+.header-remove{
+    left: 50px;
+    text-align: right;
+    margin-right: 30px;
+
 }
-.btn{
-    background-color: #000;
-    border-color: #000;
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0;
+
+/*continue shopping button*/
+.continue-shopping {
+    display: flex;
+    justify-content: flex-start; 
+    margin-top: 20px; 
+    margin-left: 10px; 
+    align-items: center; 
+
 }
-.btn:focus{
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none; 
-}
-.btn:hover{
-    color: white;
-}
-a{
+  
+.continue-shopping-btn {
+    display: inline-flex; 
+    align-items: center; 
+    background-color: white; 
     color: black; 
+    text-decoration: none; 
+    padding: 10px 15px; 
+    border-radius: 20px; 
+    transition: background-color 0.3s;
+    box-shadow: 0 0 5px white;
+    font-weight: normal;
 }
-a:hover{
+  
+.continue-shopping-btn:hover {
+    background-color: aqua; 
     color: black;
+    box-shadow: 0 0 10px aqua;
+}
+.continue-shopping-btn ion-icon {
+    margin-right: 5px; /* Space between icon and text */
+    --ionicon-stroke-width: 32px; /* Adjust the icon size */
+}
+
+/********************************************/
+/*Summary SECTION*/
+.summary {
+    width: 25%;
+    padding: 20px;
+    background: aqua;
+    border-radius: 4px;
+    margin-top: 73px;
+    margin-bottom: 60px;   
+}
+.summary h2 {
+    margin-bottom: 20px;
+    color: #000;
+}
+  
+.summary p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #000;
+}
+  
+.summary input {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    color: gray;    
+}
+  
+.checkout-btn {
+    background-color:  hsl(240, 100%, 6%);;
+    color: white;
+    font-size: 15px;
+    padding: 10px 20px;
+    margin-top: 50px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    border-radius: 60px;
+}
+.checkout-btn:hover {
+    transform: matrix3d(1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1);
+}
+  
+/*back button to navigate to shop.html */
+.back-to-shop {
+    position: absolute;
+    top: 130px; /* Adjust this value as needed to move up */
+    left: 160px; /* Aligns with the padding of the cart items */
+    display: flex;
+    align-items: center;
+
+}
+  
+.back-to-shop-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #ffffff; 
     text-decoration: none;
+
 }
- #code{
-    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
-    background-repeat: no-repeat;
-    background-position-x: 95%;
-    background-position-y: center;
+
+.back-to-shop-btn:hover {
+    color: aqua;
+    transform: matrix(1.1, 0, 0, 1.1, 0, 0);
 }
+
+.back-to-shop-btn ion-icon {
+    font-size: 20px ;
+}
+  
