@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "name": "Black Night",
+      "price": "80.00 BAM",
+      "image": "./assets/images/book-1.png",
+      "new": true
+    },
+    {
+      "id": 2,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-2.png",
+      "new": false
+    },
+    {
+      "id": 3,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-3.png",
+      "new": true
+    },
+    {
+      "id": 4,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-4.png",
+      "new": true
+    },
+    {
+      "id": 5,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-4.png",
+      "new": true
+    },
+    {
+      "id": 6,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-4.png",
+      "new": true
+    },
+    {
+      "id": 7,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-4.png",
+      "new": true
+    },
+    {
+      "id": 8,
+      "name": "About The First Night",
+      "price": "35.00 BAM",
+      "image": "./assets/images/book-4.png",
+      "new": true
+    }
+  ]

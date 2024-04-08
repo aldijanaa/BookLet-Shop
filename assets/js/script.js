@@ -102,3 +102,8 @@ window.onclick = function(event) {
     }
   }
 }*/
+
+//redirect to cart page!!!!!
+function redirectToCart() {
+  window.location.href = 'cart.html';
+}

@@ -1,0 +1,27 @@
+[
+    {
+        "title": "EMIR KUGIC Every Thing",
+        "price": "157.00",
+        "image": "./assets/images/book-12.png",
+        "stars": [true, true, true, true, true]
+    },
+    {
+        "title": "Black Night ALDIJ",
+        "price": "120.00",
+        "image": "./assets/images/book-1.png",
+        "stars": [true, true, true, true, true]
+    },
+    {
+        "title": "About The First Night ",
+        "price": "99.00",
+        "image": "./assets/images/book-2.png",
+        "stars": [true, true, true, false, false]
+    },
+    {     
+        "title": "Open The Sky",
+        "price": "110.00",
+        "image": "./assets/images/book-3.png",
+        "stars": [true, true, true, true, true]
+
+    }
+]

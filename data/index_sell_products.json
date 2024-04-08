@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Self Care",
+        "price": "34.99",
+        "image": "./assets/images/book-9.png",
+        "stars": [true, true, false, false, false]
+    },
+    {
+        "title": "Welcome To Space",
+        "price": "23.50",
+        "image": "./assets/images/book-10.png",
+        "stars": [true, true, true, false, false]
+    },
+    {
+        "title": "Monsoon",
+        "price": "54.50",
+        "image": "./assets/images/book-11.png",
+        "stars": [true, true, false, false, false]        
+    },
+    {
+        "title": "Every Thing You Never",
+        "price": "99.50",
+        "image": "./assets/images/book-12.png",
+        "stars": [true, true, true, true, true]
+    }
+]

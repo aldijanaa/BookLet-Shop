@@ -1,0 +1,20 @@
+[
+    {
+      "imgSrc": "assets/images/book-1.png",
+      "title": "Black Night",
+      "author": "John Doe",
+      "unitPrice": 80.00,
+      "quantity": 2,
+      "finalPrice": 160.00
+    },
+    {
+      "imgSrc": "assets/images/book-2.png",
+      "title": "Bright Day",
+      "author": "Jane Doe",
+      "unitPrice": 18,
+      "quantity": 1,
+      "finalPrice": 18
+    }
+   
+  ]
+  
