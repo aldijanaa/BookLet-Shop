@@ -11,10 +11,6 @@ body{
   width: 100%;
 } 
 
-.container .grid-list{
-    padding-top: 80px;
-}
-
 /*novo za sorting*/
 .dropbtn {
   background-color: #3498DB;
@@ -23,7 +19,7 @@ body{
   font-size: 16px;
   border: none;
   cursor: pointer;
-}
+} 
 
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
@@ -309,129 +305,231 @@ body{
 
 
 /*RESPONSIVE MEDIAS*/
-/* For mobile phones: */
+/* responsive for up to 574px screen*/
 @media (max-width: 575px) {
+ 
 
-  /*footer*/
-  .footer-brand .logo{
-    margin-left: 20px;
+  /*featured list*/
+  .container .grid-list{
+    padding: 20px;
   }
-  .footer-text{
-    margin-left: 20px;
-    font-size: 15px;
+ /*modals in main content*/
+  .modal{
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Center modal on the screen */
+    width: 100%;
+    height: 100%;
+    z-index: 1000; /* Ensure it's on top of other content */
+    position: fixed;  
+    left: 0;
+    right: 0;
+    bottom: 0; 
   }
-  .social-list{
-    margin-left: 20px;
-    font-size: 15px;
-  } 
-  .footer-list .footer-list-title{
-    margin-left: 20px;
-    font-size: 15px;
+
+  .modal-content{
+    width: auto;
+    max-width: 95%;
+    padding:20px;
+    margin-top: 5vh;
+    margin: 0 auto; /* Center the modal on the screen */
+    position: relative;
+    box-sizing: border-box;
+    /*max-width: 350px;*/ 
+    overflow: auto; /* Add this to allow scrolling */
+    overflow-x: hidden; /* Hide horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns items to the left */
   }
-  .footer-list .footer-link{
-    margin-left: 20px;
-    font-size: 15px;
+  .modal-content .modal-book-image{
+    padding: 0;
+    margin: 0;
+    width: 60%; 
+    /*max-width: 60%;*/
+    margin-right: 10px; 
+    margin-left: -10%;    /* mnogo čudno  */
+    height: auto; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+    display: block;
   }
-  /*navbar*/
-   /*have to do little adjustments to navbar in mobile view*/
-   .navbar-list .navbar-link{
-    font-size: 10px;
-    margin-left: 10px;
+  .modal-book-title,
+  .modal-book-author,
+  .modal-book-price,
+  .modal-book-stars,
+  .modal-book-description-title,
+  .modal-book-description,
+  .modal-content hr {
+    margin-left: 5px; 
+    text-align: left; 
+    font-size: 13px; 
+    margin-top: 0;
+    width: auto;
+    box-sizing: border-box;
+    max-width: 100%; 
   }
-   /*text search our store in search bar*/
-   .navbar-top .input-field{
-      font-size: 13px;
-  }
-  .navbar-top {
-    margin-top: 10px;
-    margin-left: 0;
-    margin-right: 0;
+  .modal-book-title {
+    margin-bottom: 2px; 
     
   }
-  .container .grid-list{
-    padding: 100px;
+  .modal-book-author {
+    margin-top: -40px; 
+  
   }
-  /*grid-list update*/
-  .container .grid-list .product-card{
+  .modal-book-stars, .modal-book-price {
+    margin-top: -40px; 
+  }
+  .modal-book-description-title{
+    margin-top: -40px;
+  }
+  .modal-book-description {
+    margin-left: 0;
+    text-align: justify;
+    width: 100%; 
+    max-width: 65%;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    margin-top: -2vh;
+    
+  }
+  .modal-content hr {
+    width: 100%; 
+    border-top: 1px solid gray; 
+    padding-right: 30px;
+    margin-top: -40px;
+  }
+
+  /* Close button positioning */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px; /* Adjust size as needed */
+    color: #aaa; /* Style as needed */
+  }
+
+  .featured .grid-list{
     padding: 40px;
   }
+ 
+}
+/********************************************************************/
+/* For large screens: */
+@media (max-width: 1200px) {
+  
 
-  .sort-container {
-    position:relative; /* Use absolute for positioning relative to parent */
-    top: auto; /* Reset any previously set top value */
-    right: 100px; /* 5px from the right */
-    margin-top: 20px; /* Adjust as needed */
-    font-size: 12px;
-    align-items: center;
-    justify-content: right;
+  /*modal*/
+  .modal{
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Center modal on the screen */
+    width: 100%;
+    height: 100%;
+    z-index: 1000; /* Ensure it's on top of other content */
+    position: fixed;  
+    left: 0;
+    right: 0;
+    bottom: 0; 
+  }
+
+  .modal-content{
+    width: auto;
+    max-width: 95%;
+    padding:20px;
+    margin-top: 5vh;
+    margin: 0 auto; /* Center the modal on the screen */
+    position: relative;
+    box-sizing: border-box;
+    /*max-width: 350px;*/ 
+    overflow: auto; /* Add this to allow scrolling */
+    overflow-x: hidden; /* Hide horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns items to the left */
+  }
+  /* Close button positioning */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px; /* Adjust size as needed */
+    color: #aaa; /* Style as needed */
+  }
+
+  .modal-content .modal-book-image{
+    padding: 0;
+    margin: 0;
+    width: 60%; 
+    /*max-width: 60%;*/
+    margin-right: 10px; 
+    margin-left: -10%;    /* mnogo čudno  */
+    height: auto; 
+    overflow: hidden; 
+    box-sizing: border-box; 
+    display: block;
+  }
+  .modal-book-title,
+  .modal-book-author,
+  .modal-book-price,
+  .modal-book-stars,
+  .modal-book-description-title,
+  .modal-book-description,
+  .modal-content hr {
+    margin-left: 10px; 
+    text-align: left; 
+    font-size: 17px; 
+    margin-top: 0;
+    width: auto;
+    box-sizing: border-box;
+    max-width: 100%; 
+  }
+  .modal-book-title {
+    margin-bottom: 2px; 
     
   }
-  .custom-select-wrapper{
-    width: 100px; /* Slightly reduce width */
-    padding: 100px;
-    margin-top: -100px;
-
-  }
-
-  .custom-select {
-    width: 80px; /* Slightly reduce width */
-    height: 25px; /* Reduce height for smaller screens */
-  }
-
-  .custom-arrow {
-    left: auto;
-    right: 5px; /* Adjust arrow position */
-  }
-
-  .custom-select-value {
-    padding-top: 2px; /* Adjust vertical alignment if needed */
-  }
-}
-
-
-
-/*tablet view, works until 768px*/
-@media (max-width: 768px) {  /*max width is 768px*/
-   /*navbar*/
-   /*have to do little adjustments to navbar in mobile view*/
-   .navbar-list .navbar-link{
-    font-size: 15px;
-    margin-left: 10px;
-  }
-   /*text search our store in search bar*/
-   .navbar-top .input-field{
-      font-size: 13px;
-  }
-  .navbar-top {
-    margin-top: 0;
-    margin-left: -4px;
-    margin-right: -4px;
-  }
+  .modal-book-author {
+    margin-top: -40px; 
   
-  /*footer*/
-  .footer-list{
-    padding-top: 30px;
   }
-  .footer-brand .logo{
-    margin-left: 20px;
+  .modal-book-stars, .modal-book-price {
+    margin-top: -40px; 
   }
-  .footer-text{
-    margin-left: 20px;
-    font-size: 15px;
+  .modal-book-description-title{
+    margin-top: -40px;
   }
-  .social-list{
-    margin-left: 20px;
-    font-size: 15px;
-  } 
-  .footer-list .footer-list-title{
-    margin-left: 20px;
-    font-size: 15px;
+  .modal-book-description {
+    margin-left: 0;
+    text-align: justify;
+    width: 100%; 
+    max-width: 65%;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    margin-top: -2vh;
+    
   }
-  .footer-list .footer-link{
-    margin-left: 20px;
-    font-size: 15px;
+  .modal-content hr {
+    width: 100%; 
+    border-top: 1px solid gray; 
+    padding-right: 30px;
+    margin-top: -40px;
   }
+
+  /* Close button positioning */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px; /* Adjust size as needed */
+    color: #aaa; /* Style as needed */
+  }
+
+
+
+
+  
+
+ 
+
 
 }
-
-

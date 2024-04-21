@@ -1,19 +1,33 @@
-.cart-main {
-    display: flex;
-    justify-content: space-between;
+main{
+    padding-top: 20px;
+}
+main.cart-main {
+    margin-top: 80px; /* Adjust this to the height of your fixed header */
     padding: 10px;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     margin-bottom: 100px;
+    display: flex;
+    justify-content: space-between;
+    position: relative; /* If your header is fixed, this will ensure .cart-main starts below the header */
+    
+}
+/*ovo je da ima doovljno razmaka izmedju headara i cart view-a*/
+body.cart-view main.cart-main {
+    margin-top: 80px; /* This will only apply when the cart view is active */
+}
+body.cart-view .navbar-list,
+body.cart-view .nav-open-btn {
+  display: none; /* This ensures that these elements are hidden when on the cart page */
+}
+
+main.cart-main .cart-container {
+    width: 75%;
+    margin-top: 1rem;
 }
   
-.cart-container {
-    width: 85%;
-    margin-top:70px;
-}
-  
-.cart-items {
+main.cart-main .cart-container .cart-items{
     /*background: #736262;*/
     border: 1px solid #f8f3f3;
     border-radius: 4px;
@@ -22,7 +36,7 @@
 }
   
 /*za svaki item u korpi*/
-.cart-item {
+main.cart-main .cart-container .cart-item{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,16 +44,16 @@
     border-bottom: 1px solid #E1E1E1;
 }
 /*ne znam za ovo */
-.header-item,
-.header-unit-price,
-.header-quantity,
-.header-final-price,
-.header-remove {
+.cart-headers.header-item,
+.cart-headers.header-unit-price,
+.cart-headers.header-quantity,
+.cart-headers.header-final-price,
+.cart-headers.header-remove {
   flex-grow: 1;
   text-align: center;
 }
 /*Item, unit price NASLOVI*/
-.cart-headers {
+main.cart-main .cart-container .cart-headers {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
@@ -47,12 +61,12 @@
 }
 
 /*Image of the book*/
-.item-description {
+main.cart-main .cart-container .item-description {
     display: flex;
     align-items: center;
 }
   
-.item-description img {
+main.cart-main .cart-container .item-description img {
     width: 150px; 
     height: 180px;
     margin-right: 10px;
@@ -274,4 +288,11 @@
 .back-to-shop-btn ion-icon {
     font-size: 20px ;
 }
+  
+
+/*MEDIA QUERIES*/
+/* Mobile devices */
+@media (max-width: 575px) {
+   
+  }
   

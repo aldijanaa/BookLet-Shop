@@ -1,0 +1,46 @@
+<main class="login-container">
+
+  <!-- Back button -->
+  <div class="close-container" id="closeButton">
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+    <label class="close">close</label>
+  </div>
+  
+  <div class="container2">
+      <input type="checkbox" id="check">
+      
+      <!-- LOGIN FORM -->
+      <div class="login form"> 
+        <h1 class="form-title">Login</h1>
+        <form action="/submit" method="post" onsubmit="return validateForm()">
+          <input type="text" id="email" placeholder="Enter your email" name="email" oninput="checkFields()"> 
+          <input type="password" id="password" placeholder="Enter your password" name="password" oninput="checkFields()">
+          <a href="#">Forgot password?</a>
+          <input type="submit" id="loginButton" class="button" value="Login"> 
+        </form>
+        <div class="signup">
+          <span class="signup">Don't have an account?
+           <label for="check">Sign up</label>
+          </span>
+        </div>
+      </div>
+      
+      <!-- REGISTRATION FORM -->
+      <div class="registration form">
+        <h1 class="form-title">Sign Up</h1>
+        <form action="/submit-register" method="post" onsubmit="return validateFormRegister()">
+          <input type="text" id="username" placeholder="Enter your username" name="username" oninput="checkFieldsRegister()">
+          <input type="text" id="email2" placeholder="Enter your email" name="email2" oninput="checkFieldsRegister()">
+          <input type="password" id="password2" placeholder="Create a password" name="password2" oninput="checkFieldsRegister()">
+          <input type="password" id="confirm-password2" placeholder="Confirm your password" name="confirm-password2" oninput="checkFieldsRegister()">
+          <input type="submit" id="signInButton" class="button" value="Signup" name="signup-button">
+        </form>
+        <div class="signup">
+          <span class="signup">Already have an account?
+           <label for="check">Login</label>
+          </span>
+        </div>
+      </div>
+  </div>  
+</main>

@@ -123,6 +123,11 @@ color: var(--white-1);
 font-size: 1.6rem;
 line-height: 1.5;
 
+/*novo*/
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
 }
 
 :focus-visible { outline-offset: 4px; }
@@ -142,7 +147,8 @@ line-height: 1.5;
 #REUSED STYLE
 \*-----------------------------------*/
 
-.container { 
+.container,
+.container-grid-list { 
   padding-inline: 5px; 
 }
 
@@ -289,12 +295,12 @@ z-index: -1;
 }
 
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   /*background-color: hsl(236, 24%, 40%);*/  /*here we change backroung of header*/
-  z-index: 4;
+  z-index: 999;
 }
 
 .header.active {
@@ -487,6 +493,8 @@ Also search bar is in this included as well */
 }
 
 /****************HERO book section****************/
+
+
 .hero .play-btn { 
   display: none; 
 }
@@ -710,65 +718,7 @@ margin-inline: auto;
 
 .filter-btn.active { color: var(--maximum-blue-green); }
 
-
-/*FOOTER*/
-.footer-top{ 
-  border-block-end: 1px solid var(--granite-gray);
-}
-.footer-text{
-  margin-block: 15px 30px;
-}
-
-.footer-top .container{
-  gap: 40px;
-}
-
-
-.social-list{
-  display: flex;
-  gap: 20px;
-}
-/*ikonice za social media*/
-.social-link{
-  font-size: 25px;
-  transition: var(--transition-1);
-}
-.social-link:is(:hover, :focus){
-  color: var(--maximum-blue-green);
-}
-
-.footer-list-title{
-  font-size: var(--fs-5);
-  font-family: var(--ff-jost);
-  margin-block-end: 15px;
-  font-weight: var(--fw-700);
-  margin-block-end: 15px;
-}
-
-.footer-link {
-  margin-block-start: 10px;
-  transition: var(--transition-1);
-}
-
-.footer-link:is(:hover, :focus) {
-  color: var(--maximum-blue-green);
-}
-
-.footer-bottom{
-  padding-block: 20px;
-  text-align: center;
-}
-/*copyright text*/
-.copyright{
-  font-size: var(--fs-6);
-  margin-block-end: 20px;
-}
-.footer .footer-brand .logo img {
-  width: 150px;
-  height: auto;
-  margin-left: -30px;
-
-}
+/***************************************/
 
 /************************************************/
 /*MEDIA QUERIES FOR RESPONSIVENESS*/
@@ -815,28 +765,7 @@ margin-inline: auto;
       padding-block-start: 150px; 
   }
 
-  /*footer*/
   
-    .footer-text{
-  
-      font-size: 16px;
-    }
-    .social-list{
-      margin-left: 20px;
-      font-size: 15px;
-    } 
-    .footer-list{
-      margin: 0;
-    }
-    .footer-list .footer-list-title{
-      margin-left: 0;
-      font-size: 15px;
-    }
-    .footer-list .footer-link{
-      margin-left: 0;
-      font-size: 15px;
-    }
-
 }
 
 
@@ -869,6 +798,7 @@ margin-inline: auto;
     --section-padding: 80px;
 
   }
+}
   
 /**
  * REUSED STYLE
@@ -936,24 +866,6 @@ margin-inline: auto;
 .countdown-time { --fs-5: 2.4rem; }
 
 
-
-/**
- * FOOTER
- */
-
-.footer-bottom { text-align: left; }
-
-.footer-bottom .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.copyright { margin-block-end: 0; }
-
-.footer-bottom .w-100 { margin-inline: 0; }
-
-} 
 
 
 /**
@@ -1133,14 +1045,6 @@ margin-inline: auto;
  .countdown-label { font-size: var(--fs-4); }
 
 
-
- /**
-  * FOOTER
-  */
-
- .footer-top .container { grid-template-columns: 1fr 0.4fr 0.5fr 0.5fr; }
-
- .footer-brand { padding-inline-end: 40px; }
 
 }
 
