@@ -1,10 +1,11 @@
 body {
   font-family: 'Arial', sans-serif;
   font-size: 17px;
-  padding: 8px;
+  overflow-x: hidden;
+
 }
 
-* {
+* { 
   box-sizing: border-box;
 }
 
@@ -61,17 +62,4 @@ label {
   margin-bottom: 20px;
 }
 
-.checkout-page .btn {
-  background-color: white; /* A green background for the button */
-  color: black;
-  padding: 12px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 20px;
-}
 
-.checkout-page .btn:hover {
-  background-color: aqua;
-  color: black; 
-}

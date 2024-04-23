@@ -301,7 +301,11 @@ body{
 }
 
 
+.featured .container{
+  margin-top: 60px;
+  padding-top: 20px;
 
+}
 
 
 /*RESPONSIVE MEDIAS*/

@@ -1149,3 +1149,33 @@ margin-inline: auto;
 
 
 
+/* Footer Styles */
+.footer {
+  background-color: hsl(243, 95%, 8%);/* Slightly lighter than the main background for contrast */
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 15px;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+/*.footer a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.footer a:hover {
+  color: #7ac142;
+}
+
+.footer ion-icon {
+  font-size: 10px;
+  vertical-align: middle;
+  margin-right: 5px;
+}*/

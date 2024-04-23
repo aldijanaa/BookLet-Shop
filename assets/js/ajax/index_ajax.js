@@ -1,44 +1,42 @@
-alert("Script execution started.");
+/*Popular collection in home.html*/
+alert("Script execution started. Popular collection TEST!");
 
-
-// Listen for the custom event that indicates the page has loaded the necessary section
-$(document).on("popularProductsPageLoaded", function () {
-  alert("Event 'popularProductsPageLoaded' has been triggered.");
-  waitForElement(".product-list.has-scrollbar", loadProducts);
+$(document).ready(function() {
+    loadProducts(); // Load the products initially without filters
 });
 
-// Function to load products based on the filter
-function loadProducts(filter = 'all') { 
-  const fileName = `./data/index_${filter}_products.json`;
-  fetch(fileName)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok ' + response.statusText);
-          }
-          return response.json();
-      })
-      .then(data => {
-          const productList = document.querySelector('.product-list.has-scrollbar');
-          if (!productList) {
-              console.error("Product list element not found, retrying...");
-              return;
-          }
-          console.log('Product data loaded:', data);
-          renderProducts(data, productList);
-      })
-      .catch(error => {
-          console.error('Error loading product data:', error);
-          alert("Error rendering products: " + error.message);
 
-      });
-}
-
+// Function to load all products without filtering
+function loadProducts() { 
+    const fileName = `./data/index_all_products.json`; 
+    fetch(fileName)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const productList = document.querySelector('.product-list.has-scrollbar');
+            if (!productList) {
+                console.error("Product list element not found, retrying...");
+                return;
+            }
+            console.log('Product data loaded:', data);
+            renderProducts(data, productList);
+        })
+        .catch(error => {
+            console.error('Error loading product data:', error);
+            alert("Error rendering products: " + error.message);
+        });
+  }
+  
 
 // Function to render products
 function renderProducts(data, productList) {
   try {
     const productsHTML = data.map(product => {
-        // Ensure product has a stars array before trying to map it
+        // Ensuring product has a stars array before trying to map it
         const starsHTML = product.stars ? product.stars.map(star => `<ion-icon name="${star ? 'star' : 'star-outline'}" aria-hidden="true"></ion-icon>`).join('') : '';
         return `
             <li class="scrollbar-item">
@@ -61,7 +59,7 @@ function renderProducts(data, productList) {
     }).join('');
 
     productList.innerHTML = productsHTML;
-    document.dispatchEvent(new CustomEvent('productsLoaded')); // Trigger the custom event after products are loaded
+    document.dispatchEvent(new CustomEvent('productsLoaded')); // Triggering custom event after products are loaded
   } catch (error) {
     console.error('Error rendering products:', error);
   }

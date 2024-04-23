@@ -106,6 +106,29 @@ section{
    transform: rotate(90deg);
 }
 
+/*Button for adding new books*/
+.btn-add {
+   display: inline-block;
+   margin-top: 1rem;
+   padding: 1rem 3rem;
+   cursor: pointer;
+   color: black;
+   font-size: 1.8rem;
+   border-radius: 20px;
+   text-transform: capitalize;
+   background-color: aqua ; 
+   transition: background-color 0.2s ease; /* Smooth transition */
+}
+
+.btn-add:hover {
+   background-color: var(--purple); /* Example hover background color */
+}
+
+/* Ensure the button is always visible */
+.btn-add {
+   opacity: 1;
+   visibility: visible;
+}
 
 .option-btn,
 .delete-btn,
@@ -114,7 +137,7 @@ section{
    margin-top: 1rem;
    padding:1rem 3rem;
    cursor: pointer;
-   color:var(--white);
+   color:aqua;
    font-size: 1.8rem;
    border-radius: .5rem;
    text-transform: capitalize;

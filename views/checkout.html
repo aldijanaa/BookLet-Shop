@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-75">
       <div class="container">
-        <form action="/action_page.php">
+        <form>
         
           <div class="row">
             <div class="col-50">
@@ -35,7 +35,7 @@
                 <i class="fa fa-cc-amex" style="color:blue;"></i>
                 <i class="fa fa-cc-mastercard" style="color:red;"></i>
                 <i class="fa fa-cc-discover" style="color:orange;"></i>
-              </div>
+              </div> 
               <label for="cname">Name on Card</label>
               <input type="text" id="cname" name="cardname" placeholder="John More Doe">
               <label for="ccnum">Credit card number</label>
@@ -54,10 +54,9 @@
               </div>
             </div>
           </div>
-          <input type="submit" value="Continue to checkout" class="btn">
+          <input type="submit" value="Continue to checkout" class="btn" onclick="window.location.hash='#thank-you'">
         </form>
       </div>
     </div>
   </div>
-  
 </main>

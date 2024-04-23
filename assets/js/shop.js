@@ -5,7 +5,7 @@ customSelect.addEventListener('click', function(event) {
 });
 
 // Update the selected value and close the dropdown
-customSelectOptions.addEventListener('click', function(event) {
+/*customSelectOptions.addEventListener('click', function(event) {
   event.stopPropagation(); // Stop the click event from bubbling up
   if (event.target.classList.contains('custom-select-option')) {
     customSelectValue.textContent = event.target.textContent;
@@ -19,4 +19,4 @@ document.addEventListener('click', function(event) {
   if (!customSelect.contains(event.target)) {
     customSelectOptions.style.display = 'none';
   }
-});
+});*/

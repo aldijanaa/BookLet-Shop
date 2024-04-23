@@ -12,29 +12,16 @@
     <!-- - favicon  -->
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
 
-    <!-- - custom css link -->
+    <!-- - custom css link -->  <!--ove css sam stavila kroz route  -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <!--<link rel="stylesheet" href="./assets/css/about-us.css">-->
     <!--<link rel="stylesheet" href="./assets/css/shop.css">-->
     <!--<link rel="stylesheet" href="./assets/css/login.css">-->   <!--login css-->
-
-    <link rel="stylesheet" href="./assets/css/cart.css">
+   <!--<link rel="stylesheet" href="./assets/css/cart.css">-->
    <!--<link rel="stylesheet" href="./assets/css/checkout.css">   drugačija logika za ovo -->
-
-
-
 
     <!--Za admina css-->
     <!--<link rel="stylesheet" href="./assets/css/admin_style.css">-->
-
-
-
-
-
-
-    
-
- 
 
     
     <!--google font Aldijana-->
@@ -77,6 +64,13 @@
           <button class="header-action-btn" aria-label="cart" title="Cart" onclick="window.location.hash='#cart'">  <!--aria label mozda ovdje ne treba, provjeriti-->
             <span class="span">0</span>   <!--currently 0 element in cart-->
             <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon> <!--icon for cart-->
+          </button>
+
+
+       <!--<div class="header-action">
+          <button class="header-action-btn" aria-label="cart" title="favs" onclick="window.location.hash='#cart'"> 
+            <span class="span">0</span>  
+            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>-->
          
           </button>
 
@@ -156,6 +150,8 @@
   <section id="login" data-load="login.html"></section>
   <section id="cart" data-load="cart.html"></section>
   <section id="checkout" data-load="checkout.html"></section>
+  <section id="thank-you" data-load="thank-you.html"></section>
+
 
 
 
@@ -173,6 +169,17 @@
 
 
   <!----------------------------------------------------->
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 BookLet. All rights reserved.</p>
+    <!--<p>Follow us on:
+      <a href="#" aria-label="Facebook" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+      <a href="#" aria-label="Twitter" title="Twitter"><ion-icon name="logo-twitter"></ion-icon></a>
+      <a href="#" aria-label="Instagram" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+    </p>-->
+  </div>
+</footer>
 
 
   
@@ -198,18 +205,15 @@
 <script src="./assets/js/ajax/cart_ajax.js"></script>
 
 
-
-
   
 
   <!--Importing JS -->
   <script src="./assets/js/script.js"></script>
   <script src="./assets/js/shop.js"></script>
   <script src="./assets/js/login-register.js"></script>
+  <script src="./assets/js/cart.js"></script>
 
 
-
-  
 
 
      <!--ionicon link  - for icons used in navbar -->
@@ -245,6 +249,7 @@ $(function () {
           load: "shop.html",
           onCreate: function() {
               // Trigger the custom event when the shop view is created
+              $('head').append('<link rel="stylesheet" href="./assets/css/shop.css" type="text/css" />');
               $(document).trigger("shopPageLoaded");
           }
       });
@@ -254,6 +259,7 @@ $(function () {
           load: "login.html",
           onCreate: function() {
               // Add 'login-page' class to body
+              $('head').append('<link rel="stylesheet" href="./assets/css/login.css" type="text/css" />');
               $('body').addClass('login-page');
           },
           onUnload: function() {
@@ -268,6 +274,7 @@ $(function () {
         load: "admin-page.html",
         onCreate: function() {
             // Add 'admin-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
             $('body').addClass('admin-page');
         },
         onUnload: function() {
@@ -281,6 +288,7 @@ $(function () {
         load: "admin-orders.html",
         onCreate: function() {
             // Add 'orders-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
             $('body').addClass('admin-orders-page');
         },
         onUnload: function() {
@@ -294,6 +302,7 @@ $(function () {
         load: "admin-add-book.html",
         onCreate: function() {
             // Add 'admin-add-book-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
             $('body').addClass('admin-add-book-page');
         },
         onUnload: function() {
@@ -307,6 +316,7 @@ $(function () {
         load: "admin-users.html",
         onCreate: function() {
             // Add 'admin-users-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
             $('body').addClass('admin-users-page');
         },
         onUnload: function() {
@@ -319,31 +329,71 @@ $(function () {
     view: "cart",
     load: "cart.html",
     onCreate: function() {
-        $('body').addClass('cart-view'); // Add class when cart is loaded
-        $('.navbar-list').hide(); // Hide the navigation links
-        $('.nav-open-btn').hide(); // Hide the mobile menu button if needed
+      $('head').append('<link rel="stylesheet" href="./assets/css/cart.css" type="text/css" />');
+        $('body').addClass('cart-view'); 
+        $('.navbar-list').hide(); 
+        $('.nav-open-btn').hide(); 
         $(document).trigger("cartPageLoaded");
     },
     onUnload: function() {
-        $('body').removeClass('cart-view'); // Remove class when cart is unloaded
-        $('.navbar-list').show(); // Show the navigation links again
-        $('.nav-open-btn').show(); // Show the mobile menu button again
+        $('body').removeClass('cart-view'); 
+        $('.navbar-list').show(); 
+        $('.nav-open-btn').show(); 
     }
   });
-      // Define the route for checkout
+    // Define the route for checkout
     app.route({
       view: "checkout",
       load: "checkout.html",
       onCreate: function() {
         $('head').append('<link rel="stylesheet" href="./assets/css/checkout.css" type="text/css" />');
         $('body').addClass('checkout-page');
-        // Any other initialization needed for checkout
+        $('.navbar-list').hide(); 
+        $('.nav-open-btn').hide(); 
+        
       },
       onUnload: function() {
         $('link[href="./assets/css/checkout.css"]').remove();
         $('body').removeClass('checkout-page');
-        // Any other cleanup needed for checkout
+        $('.navbar-list').show(); 
+        $('.nav-open-btn').show(); 
+       
       }
+    });
+    // Define the route for 'thank-you' 
+    app.route({
+        view: "thank-you",
+        load: "thank-you.html",
+        onCreate: function() {
+            // Add 'thank-you-page' class to body and load the thank-you page CSS
+            $('head').append('<link rel="stylesheet" id="thank-you-style" href="./assets/css/thank-you.css" type="text/css" />');
+            $('body').addClass('thank-you-page');
+            $('.navbar-list').hide(); 
+            $('.nav-open-btn').hide(); 
+        },
+        onUnload: function() {
+            // Remove 'thank-you-page' class from body and unload the thank-you page CSS when navigating away
+            $('body').removeClass('thank-you-page');
+            $('#thank-you-style').remove(); // This removes the dynamically added CSS for cleanup
+            $('.navbar-list').show(); 
+            $('.nav-open-btn').show(); 
+        }
+    });
+
+    // Define the route for 'about-us'
+    app.route({
+        view: "about-us",
+        load: "about-us.html",
+        onCreate: function() {
+            // Any initialization needed for the about-us page
+            $('head').append('<link rel="stylesheet" href="./assets/css/about-us.css" type="text/css" />');
+            $('body').addClass('about-us-page');
+        },
+        onUnload: function() {
+            // Any cleanup needed for the about-us page
+            $('link[href="./assets/css/about-us.css"]').remove();
+            $('body').removeClass('about-us-page');
+        }
     });
 
 

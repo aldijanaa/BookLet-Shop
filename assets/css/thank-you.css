@@ -1,0 +1,54 @@
+.thank-you-container {
+    text-align: center;
+    background-color: hsl(243, 95%, 8%);
+    padding: 50px 20px;
+    color: white;
+    min-height: 100vh; /* Adjust height to fit your SPApp page structure */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thank-you-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .thank-you-container p {
+    margin-bottom: 30px;
+  }
+  
+  .checkmark-container {
+    margin: 0 auto 20px;
+
+  }
+  .checkmark-icon {
+    color: aqua;
+    font-size: 150px; /* Adjust icon size as needed */
+}
+  
+ 
+ 
+.btn-home {
+    background-color: aqua;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.btn-home:hover {
+    box-shadow: 0 0 10px 5px rgba(241, 218, 218, 0.3);
+  }
+  
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  

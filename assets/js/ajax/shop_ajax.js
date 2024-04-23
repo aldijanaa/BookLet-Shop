@@ -14,30 +14,36 @@ const booksPerPage = 10;
 let data;  // This will store the fetched books data
 
 function loadBooks() {
-    // If data is not already fetched, fetch it
     if (!data) {
-        fetch('./data/shop_data.json') // Adjust the path to your shop_data.json
-            .then(response => response.json())
+        fetch('http://localhost/WEB_Projekat%20sa%20spappom/backend/scripts/get_all_books.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
             .then(fetchedData => {
                 data = fetchedData;
                 displayBooks();
             })
             .catch(error => console.error('Error loading book data:', error));
     } else {
-        // If data is already fetched, simply display the books
         displayBooks();
     }
 }
 
+
 function displayBooks() {
     const productList = $('.grid-list');
-    const booksToLoad = data.books.slice(currentBookIndex, currentBookIndex + booksPerPage);
+    // If data is an array, use it directly. Remove `data.books`.
+    const booksToLoad = data.slice(currentBookIndex, currentBookIndex + booksPerPage);
     booksToLoad.forEach(book => {
         const bookHTML = createBookHTML(book);
         productList.append(bookHTML);
     });
     currentBookIndex += booksPerPage;
 }
+
 
 function createBookHTML(book) {
     return `
@@ -78,7 +84,22 @@ function setupInfiniteScrolling() {
 
 function setupInteractions() {
     const modal = $("#bookDetailModal");
+    
+    // Interactions for each product card, delegate the event from the static parent
+    $(document).on('click', '.grid-list .action-btn', function(event) {
+        const bookId = $(this).data('book-id');
+        // Since `data` variable is an array now, we access it directly.
+        const book = data.find(b => b.id == bookId); // Ensure the type matches, == instead of ===
 
+        if (book) {
+            if ($(this).attr('aria-label') === "quick view") {
+                showModal(book);
+            } else if ($(this).attr('aria-label') === "add to wishlist") {
+                addToWishlist(book);
+            }
+            // Add more interactions as needed
+        }
+    });
     // Close the modal when the 'x' button is clicked
     modal.find(".close").on('click', function() {
         modal.hide();
@@ -116,16 +137,15 @@ function showModal(book) {
     modal.find(".modal-book-price").text(`${book.price} BAM`);
     modal.find(".modal-book-description").text(book.description);
 
-    // Create stars HTML based on the book's star rating
+    // Create stars HTML based on the book's integer star rating
     let starsHtml = '';
-    book.stars.forEach(star => {
-        if (star) {
-            starsHtml += '<ion-icon name="star"></ion-icon>'; // Assuming you are using ion-icons
-        } else {
-            starsHtml += '<ion-icon name="star-outline"></ion-icon>'; // For empty stars
-        }
-    });
-    modal.find(".modal-book-stars").html(starsHtml); // Update the star ratings in the modal
+    for (let i = 0; i < book.stars; i++) {
+        starsHtml += '<ion-icon name="star"></ion-icon>';
+    }
+    for (let i = book.stars; i < 5; i++) {
+        starsHtml += '<ion-icon name="star-outline"></ion-icon>';
+    }
+    modal.find(".modal-book-stars").html(starsHtml);
 
     // Show the modal
     modal.show();
