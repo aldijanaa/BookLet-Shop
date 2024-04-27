@@ -1,54 +1,54 @@
-<main>
-    <article>
+<main class="shop"> 
+  <article>
 
-      <!--Sort button-->
-      <div class="sort-container">
-        <label for="sortby">Sort By</label>
-        <div class="custom-select-wrapper">
-          <div class="custom-select" id="customSelect">
-            <div class="custom-select-value" id="customSelectValue">Name</div>
-            <div class="custom-arrow">
-              <ion-icon name="chevron-down-outline"></ion-icon>
-            </div>
-            <div class="custom-select-options" id="customSelectOptions" style="display: none;">
-              <div class="custom-select-option" data-value="name">Name</div>
-              <div class="custom-select-option" data-value="price">Price</div>
-            </div>
+    <!--Sort button-->
+   <!--<div class="sort-container">
+      <label for="sortby">Sort By</label>
+      <div class="custom-select-wrapper">
+        <div class="custom-select" id="customSelect">
+          <div class="custom-select-value" id="customSelectValue">Name</div>
+          <div class="custom-arrow">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </div>
+          <div class="custom-select-options" id="customSelectOptions" style="display: none;">
+            <div class="custom-select-option" data-value="name">Name</div>
+            <div class="custom-select-option" data-value="price">Price</div>
           </div>
         </div>
       </div>
-      
-      
-
-
-      <!--FEATURED COLLECTIONS BOOKS SECTION-->
-      <section class="section featured" title="section featured">
-        <div class="container">
-
-          <ul class="grid-list">
-          </ul>
-        </div>
-      </section>
-
-
-    </article>
-  </main>
-
-    <!--QUICK VIEW: Modals-->
-    <div id="bookDetailModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <img src="" alt="" class="modal-book-image">
-            <h2 class="modal-book-title">Book Title</h2>
-            <p class="modal-book-author">Author Name</p>
-            <p class="modal-book-price">Price: $0.00</p>
-            <div class="modal-book-stars"></div>
-            <hr>
-            <p class="modal-book-description-title">Description</p>
-            <p class="modal-book-description"></p> 
-        </div>
-    </div>
+    </div>-->
     
     
-    <!--Za favorit pop-up-->
-    <div id="favoritePopup" class="favorite-popup">Added to Favorites</div>
+
+
+    <!--FEATURED COLLECTIONS BOOKS SECTION-->
+    <section class="section featured" title="section featured">
+      <div class="container">
+
+        <ul class="grid-list">  <!--dynamically dodano u shop.ajax-->
+        </ul>
+      </div>
+    </section>
+
+
+  </article>
+</main>
+
+  <!--QUICK VIEW: Modals-->
+  <div id="bookDetailModal" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <img src="" alt="" class="modal-book-image">
+          <h2 class="modal-book-title">Book Title</h2>
+          <p class="modal-book-author">Author Name</p>
+          <p class="modal-book-price">Price: $0.00</p>
+          <div class="modal-book-stars"></div>
+          <hr>
+          <p class="modal-book-description-title">Description</p>
+          <p class="modal-book-description"></p> 
+      </div>
+  </div>
+  
+  
+  <!--Za favorit pop-up-->
+  <div id="favoritePopup" class="favorite-popup">Added to Favorites</div>

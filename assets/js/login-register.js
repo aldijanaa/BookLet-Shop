@@ -126,10 +126,6 @@ validateFormRegister = () =>{
     return true;
 }
 
-//Back button
-document.getElementById("closeButton").addEventListener("click", function() {
-    window.location.href = "index.html"; // Redirect to the homepage (for now)
-});
 
 
 

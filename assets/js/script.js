@@ -15,10 +15,7 @@ const addEventOnElem = function (elem, type, callback) {
     }
   }
   
-  /**
- * navbar toogle -- ovo da postane navbar aktivan
- */
-
+/*navbar toogle -- ovo da postane navbar aktivan*/
 const navbar = document.querySelector("[data-navbar]");
 const navTogglers = document.querySelectorAll("[data-nav-toggler]");
 const overlay = document.querySelector("[data-overlay]");
@@ -49,31 +46,11 @@ const activeElemOnScroll = function () {
 
 addEventOnElem(window, "scroll", activeElemOnScroll);
 
-/*filter function in POPULAR COLLECTIONS SECTION*/
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-const filterItems = document.querySelectorAll("[data-filter]");
-
-let lastClickedBtn = filterBtn[0];
-
-const filter = function () {
-  lastClickedBtn.classList.remove("active");
-  this.classList.add("active");
-  lastClickedBtn = this;
-
-  for (let i = 0; i < filterItems.length; i++) {
-    if (filterItems[i].dataset.filter === this.dataset.filterBtn) {
-      filterItems[i].style.display = "block";
-    } else {
-      filterItems[i].style.display = "none";
-    }
-  }
-}
-
-addEventOnElem(filterBtn, "click", filter);
 
 
-/*when clicking on the Contact in navbar, scroll to the bottom of the document to view contact info*/
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+/* REMOVED CONTACT FROM HEADER NAV LINKS
+when clicking on the Contact in navbar, scroll to the bottom of the document to view contact info*/
+/*document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
      e.preventDefault();
 
@@ -81,11 +58,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         behavior: 'smooth'
      });
   });
-});
+});*/
 
 
 //dropdown on user ikonici
-/*function myFunction() {
+function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
@@ -101,9 +78,4 @@ window.onclick = function(event) {
       }
     }
   }
-}*/
-
-//redirect to cart page!!!!!
-function redirectToCart() {
-  window.location.href = 'cart.html';
 }

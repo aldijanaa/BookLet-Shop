@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> 
+<head>  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +12,16 @@
     <!-- - favicon  -->
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
 
-    <!-- - custom css link -->
+    <!-- - custom css link -->  <!--ove css sam stavila kroz route  -->
     <link rel="stylesheet" href="./assets/css/style.css">
-    
+    <!--<link rel="stylesheet" href="./assets/css/about-us.css">-->
+    <!--<link rel="stylesheet" href="./assets/css/shop.css">-->
+    <!--<link rel="stylesheet" href="./assets/css/login.css">-->   <!--login css-->
+   <!--<link rel="stylesheet" href="./assets/css/cart.css">-->
+   <!--<link rel="stylesheet" href="./assets/css/checkout.css">   drugačija logika za ovo -->
 
-
-    <!--za spapp-->
-   <!--<link rel="stylesheet" href="./assets/css/login.css">
-    <link rel="stylesheet" href="./assets/css/about-us.css">
-    <link rel="stylesheet" href="./assets/css/about-us.css">-->
+    <!--Za admina css-->
+    <!--<link rel="stylesheet" href="./assets/css/admin_style.css">-->
 
     
     <!--google font Aldijana-->
@@ -30,13 +31,11 @@
 
    
   <!-- preload images-->
-  <link rel="preload" as="image" href="./assets/images/hero-bg.jpg">
+  <!--<link rel="preload" as="image" href="./assets/images/hero-bg.jpg">-->
 
-  <!-- jQuery (necessary for SPApp's JavaScript plugins) -->
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
   <!--JQUERY CSS Import (for SPApp)-->
-  <!--<link rel="stylesheet" href="./assets/css/spapp.css">-->
+  <link rel="stylesheet" href="./assets/css/spapp.css">
 </head>
 
 
@@ -62,9 +61,16 @@
 
         <!--Cart icon action in header-->
         <div class="header-action">
-          <button class="header-action-btn" aria-label="cart" title="Cart" onclick="redirectToCart()">  <!--aria label mozda ovdje ne treba, provjeriti-->
+          <button class="header-action-btn" aria-label="cart" title="Cart" onclick="window.location.hash='#cart'">  <!--aria label mozda ovdje ne treba, provjeriti-->
             <span class="span">0</span>   <!--currently 0 element in cart-->
             <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon> <!--icon for cart-->
+          </button>
+
+
+       <!--<div class="header-action">
+          <button class="header-action-btn" aria-label="cart" title="favs" onclick="window.location.hash='#cart'"> 
+            <span class="span">0</span>  
+            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>-->
          
           </button>
 
@@ -75,7 +81,7 @@
 
           <!--User icon JEDINO OVAKO JE HTJELO-->
           <div class="user-icon-container" > <!--id="dropdownContent"-->
-            <a href="login.html" class="header-action-btn" title="User">
+            <a href="#login" class="header-action-btn" title="User">
               <ion-icon name="person-outline"></ion-icon>
               <span class="login-text">Login</span>
             </a>
@@ -108,20 +114,23 @@
             <ul class="navbar-list">
   
               <li>
-                <a href="index.html" class="navbar-link">Home</a>
-              </li>       
+                <a href="#home" class="navbar-link">Home</a>
+              </li>  
+                                
   
               <li>
-                <a href="shop.html" class="navbar-link">Shop</a>
+                <a href="#shop" class="navbar-link">Shop</a>
               </li>
   
               <li>
-                <a href="about-us.html" class="navbar-link">About Us</a>
+                <a href="#about-us" class="navbar-link">About Us</a>
               </li>
-  
-              <li>
+              <!--<li>
                 <a href="#contact" class="navbar-link">Contact</a>
-              </li> 
+              </li>-->
+  
+  
+             
             </ul>  
           </nav>  
 
@@ -129,326 +138,285 @@
       </div>
   
       <div class="overlay active" data-overlay data-nav-toggler></div>
-    </header>
+    </header> 
 
 <!--------------------------------------------------->
    
 <!-- SPApp Main Content -->
-
-<!--<main id="spapp" role="main">
+<main id="spapp" role="main">
   <section id="home" data-load="home.html"></section>
-  <!-<section id="shop" data-load="shop.html"></section>-->
-  <!--<section id="about2" data-load="about.html"></section>-->
-  <!--<section id="contact2" data-load="contact.html"></section>-->
-<!--</main>-->
-
-<main>
-  <article>
-
-    <!-- - #HERO -->
-    <section class="section hero has-bg-image"> <!--ovdje je bilo jos: style="background-image: url('./assets/images/hero-bg.jpg')"-->
-      <div class="container">
-
-        <div class="hero-content">
-
-          <h1 class="h1 hero-title has-after">
-            Get Your New <br>
-            Book Collections
-          </h1>
-
-          <p class="hero-text">
-            Open the door to endless worlds, hurry up shop books online effortlessly!
-            All from the comfort of your own home.
-          </p>
-
-          <div class="btn-wrapper">
-            <a href="shop.html" class="btn">
-              <span class="span">Explore More</span>
-              <ion-icon name="cart"></ion-icon>
-            </a>
-
-          </div>
-        </div>
+  <section id="shop" data-load="shop.html"></section>
+  <section id="about-us" data-load="about-us.html"></section>
+  <section id="login" data-load="login.html"></section>
+  <section id="cart" data-load="cart.html"></section>
+  <section id="checkout" data-load="checkout.html"></section>
+  <section id="thank-you" data-load="thank-you.html"></section>
 
 
-        <!--Hero banner book image-->
-        <figure class="hero-banner">
-          <img src="./assets/images/hero-banner.png" width="475" height="600" alt="hero banner" class="w-100">
-          <!--class before: w-100-->
-        </figure>
-
-      </div>
-    </section>
 
 
-    <!--   #FEATURES: Free Shipping, Secure Payment, Best Price, Easy Return -->
 
-    <section class="section feature" >
-      <div class="container">
-        <div class="grid-list">
-
-          <!--Feature 1: Free shipping-->
-          <li>
-            <div class="feature-card">
-              <div class="card-icon">
-                <img src="./assets/images/feature-1.png" width="100" height="100" loading="lazy" alt="feature icon"
-                  class="w-100">
-              </div>
-
-              <div>
-                <h3 class="h3 card-title">Free Shipping</h3>
-                <p class="card-text">Order over 100 BAM</p>
-              </div>
-            </div>
-          </li>
-
-          <!--Feature 2: Secure Payment-->
-          <li>
-            <div class="feature-card">
-              <div class="card-icon">
-                <img src="./assets/images/feature-2.png" width="100" height="100" loading="lazy" alt="feature icon"
-                  class="w-100">
-              </div>
-
-              <div>
-                <h3 class="h3 card-title">Secure Payment</h3>
-                <p class="card-text">100% Secure Payment</p>
-              </div>
-
-            </div>
-          </li>
+  <section id="admin-page" data-load="admin-page.html"></section>
+  <section id="admin-orders" data-load="admin-orders.html"></section>
+  <section id="admin-add-book" data-load="admin-add-book.html"></section>
+  <section id="admin-users" data-load="admin-users.html"></section>
 
 
-          <!--Feature 2: Best Price-->
-          <li>
-            <div class="feature-card">
-              <div class="card-icon">
-                <img src="./assets/images/feature-3.png" width="100" height="100" loading="lazy" alt="feature icon"
-                  class="w-100">
-              </div>
-
-              <div>
-                <h3 class="h3 card-title">Best Price</h3>
-                <p class="card-text">Guaranteed Low Cost</p>
-              </div>
-
-            </div>
-          </li>
-
-          <!--Feature 4: Easy Return-->
-          <li>
-            <div class="feature-card">
-              <div class="card-icon">
-                <img src="./assets/images/feature-4.png" width="100" height="100" loading="lazy" alt="feature icon"
-                  class="w-100">
-              </div>
-
-              <div>
-                <h3 class="h3 card-title">Easy Return</h3>
-                <p class="card-text">Within 30 Days returns</p>
-              </div>
-
-            </div>
-          </li>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!---------------------------------------------------->
 
 
-    <!--FEATURED COLLECTIONS BOOKS SECTION-->
-    <section class="section featured">
-      <div class="container">   
-        <!--Text-->
-        <h2 class="h2 section-title">Featured Collections</h2>
-        <p class="section-text">
-          Get lost in the beauty of the world of books!
-        </p>
-
-
-        <ul class="grid-list">
-
-        </ul>
-
-      </div>
-    <!------------------------------------->
-
-    <!-- - #OFFER -->
-    <section class="section offer has-bg-image" style="background-image: url('./assets/images/section-bg.jpg')">
-      <div class="container">
-        <p class="section-subtitle">Special Offers</p>
-        <h2 class="h2 section-title">All books are 50% off now! Don't miss such a deal!</h2>
-      </div>
-    </section>
-
-    <!------------------------------------------------>
-    <!-- - #POPULAR COLLECTION-->
-   <section class="section popular" >
-      <div class="container">
-
-        <h2 class="h2 section-title">Popular Collections</h2>
-
-        <p class="section-text">
-          Some of famous books that you may like!
-        </p>
-
-        <!--Filtering criteria: Featured Products, New Products, Upsell Products-->
-        <ul class="filter-list">
-          <li>
-            <button class="filter-btn" data-filter-btn="featured">Featured Products</button>
-          </li>
-
-          <li>
-            <button class="filter-btn" data-filter-btn="new">New Products</button>
-          </li>
-
-          <li>
-            <button class="filter-btn" data-filter-btn="sell">Upsell Prodcuts</button>
-          </li>
-        </ul>
-
-
-        <ul class="product-list has-scrollbar"><!--ovo sve dodano dynamically json-->
-
-
-        </ul>
-      </div>
-    </section>
-  </article>
 
 </main>
 
-    <!----------------------------------------------------->
-      <!--FOOTER-->
-    <footer id="contact" class="footer has-bg-image" style="background-image: url('./assets/images/section-bg.jpg')">
 
-        <div class="footer-top section">
-          <div class="container grid-list">
-    
-            <div class="footer-brand"> 
-    
-              <a href="#" class="logo">
-                <img src="./assets/images/logo (1).png" width="138" height="28" alt="booken home">
-              </a>
-    
-              <p class="footer-text">         
-               <br>Office Number: +387 63 123 456
-               <br>Email: booklet@org.com
-               <br>Address: 1234 Book Street, Bookland, 12345
-               <br>Working Hours: 8:00 AM - 8:00 PM
-               <br>
-              </p>
+  <!----------------------------------------------------->
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 BookLet. All rights reserved.</p>
+    <!--<p>Follow us on:
+      <a href="#" aria-label="Facebook" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+      <a href="#" aria-label="Twitter" title="Twitter"><ion-icon name="logo-twitter"></ion-icon></a>
+      <a href="#" aria-label="Instagram" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+    </p>-->
+  </div>
+</footer>
 
-              <!--socials-->
-              <ul class="social-list">
-    
-                <li>
-                  <a href="#" class="social-link">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="social-link">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="social-link">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="social-link">
-                    <ion-icon name="logo-youtube"></ion-icon>
-                  </a>
-                </li>
-    
-                <li>
-                  <a href="#" class="social-link">
-                    <ion-icon name="logo-pinterest"></ion-icon>
-                  </a>
-                </li>
-              </ul>    
-            </div>
-    
-            <ul class="footer-list">
-    
-              <li>
-                <p class="footer-list-title" >About Us</p>
-              </li>
-    
-              <li>
-                <a href="about-us.html" class="footer-link">About Us</a>
-              </li>
-    
-              <li>
-                <a href="#" class="footer-link">Contact Us</a>
-              </li>
-    
-              <li>
-                <a href="#" class="footer-link">FAQs</a>
-              </li>
-    
-              <li>
-                <a href="#" class="footer-link">Delivery Information</a>
-              </li>
-            </ul>
-    
-          </div>
-        </div>
 
-      <!--copyright rights-->
-        <div class="footer-bottom">
-          <div class="container">    
-            <p class="copyright">
-              Copyright 2024 
-            </p>
-          </div>
-        </div>
-    </footer>
+  
     
   
-
-
-     <!--Importing JS -->
-  <script src="./assets/js/script.js"></script>
-
-
     
 
-  <!--ionicon link  - for icons used in navbar -->
+  
+  <!-- Import jQuery first -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!--OVE SKRIPTE SPAPPA RADE!!!!!!!-->
+<script src="./assets/js/jquery/jquery.spapp.min.js"></script>
+<script src="./assets/js/jquery/jquery.min.js"></script>
+
+
+
+<!--AJAX CALLS-->
+<script src="./assets/js/ajax/index_featured_collection_ajax.js"></script>
+<script src="./assets/js/ajax/index_ajax.js"></script>
+<script src="./assets/js/ajax/shop_ajax.js"></script>
+<script src="./assets/js/ajax/cart_ajax.js"></script>
+
+
+  
+
+  <!--Importing JS -->
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/shop.js"></script>
+  <script src="./assets/js/login-register.js"></script>
+  <script src="./assets/js/cart.js"></script>
+
+
+
+
+     <!--ionicon link  - for icons used in navbar -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  
-   <!--AJAX CALLS: MUST BE IMPORTED ALL OF THEM-->
-  <script src="/assets/js/ajax/index_ajax.js"></script>
-  <script src="/assets/js/ajax/index_featured_collection_ajax.js"></script>
 
 
-  <!--SPAPP-->
-  <!--<script src="./assets/js/jquery/custom.js"></script>
-  <script src="./assets/js/jquery/jquery.spapp.js"></script>
-  <script src="./assets/js/jquery/jquery.spapp.min.js"></script>-->
 
-
-<!-- SPApp -->
-<!--<script>
-  $(function () {
+<!-- SPApp Initialization-->
+<script>
+$(function () {
+    // Initialize SPApp
     var app = $.spapp({
-      defaultView: "home",
-      templateDir: "./views/",
-      pageNotFound : "error_404"
+        defaultView: "home",
+        templateDir: "./views/",
+        pageNotFound: "error_404"
     });
-    
-    app.run();
+
+      // Define what happens when 'home' view is loaded
+      app.route({
+        view: "home",
+        load: "home.html",
+        onCreate: function() {
+            // Once the view is created, load the books
+            $(document).trigger("booksPageLoaded");
+            $(document).trigger("loadProducts");
+
+        }
+    });
+    // Define what happens when 'shop' view is loaded
+      app.route({
+          view: "shop",
+          load: "shop.html",
+          onCreate: function() {
+              // Trigger the custom event when the shop view is created
+              $('head').append('<link rel="stylesheet" href="./assets/css/shop.css" type="text/css" />');
+              $(document).trigger("shopPageLoaded");
+          }
+      });
+      // Define the route for 'login' and also hiding header and footer
+      app.route({
+          view: "login",
+          load: "login.html",
+          onCreate: function() {
+              // Add 'login-page' class to body
+              $('head').append('<link rel="stylesheet" href="./assets/css/login.css" type="text/css" />');
+              $('body').addClass('login-page');
+          },
+          onUnload: function() {
+              // Remove 'login-page' class from body when navigating away from login
+              $('body').removeClass('login-page');
+          }
+      });
+
+      // Define the route for 'admin-page' and hide header and footer
+    app.route({
+        view: "admin-page",
+        load: "admin-page.html",
+        onCreate: function() {
+            // Add 'admin-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
+            $('body').addClass('admin-page');
+        },
+        onUnload: function() {
+            // Remove 'admin-page' class from body when navigating away from admin-page
+            $('body').removeClass('admin-page');
+        }
+    });
+    // Define the route for 'orders' and hide header
+    app.route({
+        view: "admin-orders",
+        load: "admin-orders.html",
+        onCreate: function() {
+            // Add 'orders-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
+            $('body').addClass('admin-orders-page');
+        },
+        onUnload: function() {
+            // Remove 'orders-page' class from body when navigating away from orders
+            $('body').removeClass('admin-orders-page');
+        }
+    });
+    // Define the route for 'admin-add-book' and hide header
+    app.route({
+        view: "admin-add-book",
+        load: "admin-add-book.html",
+        onCreate: function() {
+            // Add 'admin-add-book-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
+            $('body').addClass('admin-add-book-page');
+        },
+        onUnload: function() {
+            // Remove 'admin-add-book-page' class from body when navigating away
+            $('body').removeClass('admin-add-book-page');
+        }
+    });
+    // Define the route for 'admin-users' and hide header
+    app.route({
+        view: "admin-users",
+        load: "admin-users.html",
+        onCreate: function() {
+            // Add 'admin-users-page' class to body
+            $('head').append('<link rel="stylesheet" href="./assets/css/admin_style.css" type="text/css" />');
+            $('body').addClass('admin-users-page');
+        },
+        onUnload: function() {
+            // Remove 'admin-users-page' class from body when navigating away
+            $('body').removeClass('admin-users-page');
+        }
+    });
+     // Define the route for cart
+    app.route({
+    view: "cart",
+    load: "cart.html",
+    onCreate: function() {
+      $('head').append('<link rel="stylesheet" href="./assets/css/cart.css" type="text/css" />');
+        $('body').addClass('cart-view'); 
+        $('.navbar-list').hide(); 
+        $('.nav-open-btn').hide(); 
+        $(document).trigger("cartPageLoaded");
+    },
+    onUnload: function() {
+        $('body').removeClass('cart-view'); 
+        $('.navbar-list').show(); 
+        $('.nav-open-btn').show(); 
+    }
   });
-</script>-->
+    // Define the route for checkout
+    app.route({
+      view: "checkout",
+      load: "checkout.html",
+      onCreate: function() {
+        $('head').append('<link rel="stylesheet" href="./assets/css/checkout.css" type="text/css" />');
+        $('body').addClass('checkout-page');
+        $('.navbar-list').hide(); 
+        $('.nav-open-btn').hide(); 
+        
+      },
+      onUnload: function() {
+        $('link[href="./assets/css/checkout.css"]').remove();
+        $('body').removeClass('checkout-page');
+        $('.navbar-list').show(); 
+        $('.nav-open-btn').show(); 
+       
+      }
+    });
+    // Define the route for 'thank-you' 
+    app.route({
+        view: "thank-you",
+        load: "thank-you.html",
+        onCreate: function() {
+            // Add 'thank-you-page' class to body and load the thank-you page CSS
+            $('head').append('<link rel="stylesheet" id="thank-you-style" href="./assets/css/thank-you.css" type="text/css" />');
+            $('body').addClass('thank-you-page');
+            $('.navbar-list').hide(); 
+            $('.nav-open-btn').hide(); 
+        },
+        onUnload: function() {
+            // Remove 'thank-you-page' class from body and unload the thank-you page CSS when navigating away
+            $('body').removeClass('thank-you-page');
+            $('#thank-you-style').remove(); // This removes the dynamically added CSS for cleanup
+            $('.navbar-list').show(); 
+            $('.nav-open-btn').show(); 
+        }
+    });
+
+    // Define the route for 'about-us'
+    app.route({
+        view: "about-us",
+        load: "about-us.html",
+        onCreate: function() {
+            // Any initialization needed for the about-us page
+            $('head').append('<link rel="stylesheet" href="./assets/css/about-us.css" type="text/css" />');
+            $('body').addClass('about-us-page');
+        },
+        onUnload: function() {
+            // Any cleanup needed for the about-us page
+            $('link[href="./assets/css/about-us.css"]').remove();
+            $('body').removeClass('about-us-page');
+        }
+    });
+
+
+
+    // Run SPApp
+    app.run();
+});
+// Page Load Events
+$(window).on('hashchange', function () {
+    if (window.location.hash === '#home') {
+        $(document).trigger("booksPageLoaded");
+    }
+});
+
+$(document).ready(function () {
+    if (window.location.hash === '#home' || window.location.hash === '') {
+        $(document).trigger("booksPageLoaded");
+    }
+  });
+</script>
+
+
+
 
 
  

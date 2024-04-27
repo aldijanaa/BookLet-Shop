@@ -1,35 +1,37 @@
 body {
   font-family: 'Arial', sans-serif;
   font-size: 17px;
-  padding: 8px;
+  overflow-x: hidden;
+
 }
 
-* {
+* { 
   box-sizing: border-box;
 }
 
-.row {
+.checkout-page main{
+  margin-top: 60px;
+}
+
+.checkout-page .row {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -16px;
 }
 
-.col-25, .col-50, .col-75 {
+.checkout-page .col-25, .col-50, .col-75 {
   padding: 0 16px;
 }
 
-.container {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: calc(100% - 60px); /* Adjust the height calculation based on your header's height */
-  padding-top: 60px; /* Height of your header */
-  margin-left: 100px;
-  scroll-behavior: none;
+.checkout-page .container {
+  margin-top: 20px; /* This can be adjusted to give more space if the header is taller */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px; /* Or your preferred max width */
 
 }
 
-.form-container {
+.checkout-page .form-container {
   width: 100%;
   max-width: 400px; /* Set a max-width for the form */
   margin: auto;
@@ -56,21 +58,8 @@ label {
   display: block;
 }
 
-.icon-container {
+.checkout-page .icon-container {
   margin-bottom: 20px;
 }
 
-.btn {
-  background-color: white; /* A green background for the button */
-  color: black;
-  padding: 12px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 20px;
-}
 
-.btn:hover {
-  background-color: aqua;
-  color: black; 
-}
