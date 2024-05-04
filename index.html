@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>BookLet</title>
   
 
@@ -203,6 +201,8 @@
 <script src="./assets/js/ajax/index_ajax.js"></script>
 <script src="./assets/js/ajax/shop_ajax.js"></script>
 <script src="./assets/js/ajax/cart_ajax.js"></script>
+<!--<script src="./assets/js/ajax/register_login_ajax.js"></script>-->
+
 
 
   
@@ -210,13 +210,14 @@
   <!--Importing JS -->
   <script src="./assets/js/script.js"></script>
   <script src="./assets/js/shop.js"></script>
-  <script src="./assets/js/login-register.js"></script>
   <script src="./assets/js/cart.js"></script>
+  <script src="./assets/js/login-register.js"></script>
 
 
 
 
-     <!--ionicon link  - for icons used in navbar -->
+
+  <!--ionicon link  - for icons used in navbar -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -253,7 +254,7 @@ $(function () {
               $(document).trigger("shopPageLoaded");
           }
       });
-      // Define the route for 'login' and also hiding header and footer
+      // Define the route for 'login' and 'register' also hiding header and footer
       app.route({
           view: "login",
           load: "login.html",
@@ -261,6 +262,10 @@ $(function () {
               // Add 'login-page' class to body
               $('head').append('<link rel="stylesheet" href="./assets/css/login.css" type="text/css" />');
               $('body').addClass('login-page');
+              $(document).trigger("registrationPageLoaded");
+
+              //$(document).trigger("registrationPageLoaded"); // Trigger the custom event when the login view is created
+
           },
           onUnload: function() {
               // Remove 'login-page' class from body when navigating away from login
@@ -401,6 +406,7 @@ $(function () {
     // Run SPApp
     app.run();
 });
+
 // Page Load Events
 $(window).on('hashchange', function () {
     if (window.location.hash === '#home') {

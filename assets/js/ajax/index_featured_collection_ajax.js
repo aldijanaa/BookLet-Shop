@@ -38,7 +38,6 @@ function loadFeaturedBooks() {
                                 <ion-icon name="star-outline" aria-hidden="false"></ion-icon>
                                 <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
 
-                                <!-- other stars... -->
                                 
                             </div>
                         </div>
