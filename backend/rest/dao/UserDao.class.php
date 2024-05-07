@@ -30,7 +30,7 @@ class UserDao extends BaseDao {
     }
 
     public function delete_user_by_id($id) {
-        $this->execute("DELETE FROM users WHERE id = :id", ["id" => $id]);
+        return $this->execute("DELETE FROM users WHERE id = :id", ["id" => $id]);
     }
 }
 ?>

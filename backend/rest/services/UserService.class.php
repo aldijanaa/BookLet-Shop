@@ -8,6 +8,7 @@ class UserService {
     public function __construct() {
         $this->user_dao = new UserDao();
     }
+
     public function get_user_by_id($user_id) {
         return $this->user_dao->get_user_by_id($user_id);
     }
@@ -19,7 +20,10 @@ class UserService {
 
     public function add_user($user) {
         // Usually, we should hash the password before saving it to the database  -- ovo kasnije implementirati
-        //$user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
+        $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
+        $user['role'] = 'USER';
+
+        
         return $this->user_dao->add_user($user);
     }
 
