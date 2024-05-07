@@ -28,9 +28,8 @@ if (!$user) {
     exit;
 }
 
-// Verify password (plain text comparison)
-// LATER TO DO: Replace with password_verify after implementing password hashing
-if ($password !== $user['password']) {
+// Verify password 
+if (!password_verify($password, $user['password'])) {
     http_response_code(401); // Unauthorized
     echo json_encode(['error' => 'Invalid password']);
     exit;

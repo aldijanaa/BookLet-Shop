@@ -63,14 +63,13 @@ if (!validateEmailTLD($data['email'])) {
     exit;
 }
 
-//Hashing password --poslije implementirati
-//$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
+//Hashing password
+$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 $user = [
     'first_name' => $data['first_name'],
     'last_name' => $data['last_name'],
     'email' => $data['email'],
-    'password' => $data['password']   //will hash the password later
+    'password' => $data['password']   //storing hashed password
 ];
 
 

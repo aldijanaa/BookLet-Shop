@@ -34,5 +34,16 @@ class BooksDao extends BaseDao
     {
         $this->execute("DELETE FROM books WHERE id = :id", ["id" => $book_id]);
     }
+
+    //search books by title or author
+    public function search_books($search_term) {
+            $search_term = '%' . $search_term . '%';
+
+            $query = "SELECT * FROM books WHERE LOWER(title) LIKE :search_term OR LOWER(author) LIKE :search_term;";
+                      
+            $params = ['search_term' => $search_term];
+
+        return $this->query($query, $params);
+    }
 }
 
