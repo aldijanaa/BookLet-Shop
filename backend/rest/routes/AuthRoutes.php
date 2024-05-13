@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../services/UserService.class.php';
-
 Flight::group('/auth', function () {
 
 
@@ -30,12 +29,12 @@ Flight::group('/auth', function () {
      *             @OA\Schema(
      *                 type="object",
      *                 required={"first_name", "last_name", "email", "password", "confirm_password"},
-     *                 @OA\Property(property="first_name", type="string"),
-     *                 @OA\Property(property="last_name", type="string"),
-     *                 @OA\Property(property="email", type="string", format="email"),
-     *                 @OA\Property(property="password", type="string", format="password"),
-     *                 @OA\Property(property="confirm_password", type="string", format="password")
-     *             )
+     *                 @OA\Property(property="first_name", type="string", example="John"),
+     *                 @OA\Property(property="last_name", type="string", example="Doe"),
+     *                 @OA\Property(property="email", type="string", format="email", example="johndoe123@gmail.com"),
+     *                 @OA\Property(property="password", type="string", format="password", example="password123"),
+     *                 @OA\Property(property="confirm_password", type="string", format="password", example="password123")
+     *             ) 
      *         )
      *     ),
      *     @OA\Response(
@@ -126,6 +125,62 @@ Flight::group('/auth', function () {
     
         return in_array($tld, $validTLDs);
     }
+
+
     
+   /**
+     * @OA\Post(
+     *     path="/auth/login",
+     *     summary="Authenticate a user and return a JWT",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         description="Credentials needed to login",
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", format="email", example="johndoe123@gmail.co"),
+     *             @OA\Property(property="password", type="string", format="password", example="emir")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Authentication successful",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="token", type="string", description="JWT for authenticated user")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Email and password are required"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Invalid email or password"
+     *     )
+     * )
+     */
+    Flight::route('POST /login', function () {
+        $data = Flight::request()->data->getData();
+        $email = trim($data['email']);
+        $password = $data['password'];
+    
+        if (empty($email) || empty($password)) {
+            Flight::json(['error' => 'Email and password are required'], 400);
+            return;
+        }
+    
+        $user_service = new UserService();
+        $result = $user_service->authenticate_user($email, $password);
+    
+        if (isset($result['token'])) {
+            Flight::json(['token' => $result['token']]);
+        } else {
+            // Output more detailed error message
+            Flight::json(['error' => $result['error']], 401);
+        }
+    });
+    
+
 
 });

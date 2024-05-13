@@ -2,6 +2,7 @@
 
 
 require_once __DIR__ . '/../services/BooksService.class.php';
+require_once __DIR__ . '/../../middleware.php';
 
 Flight::group('/books', function() {
     

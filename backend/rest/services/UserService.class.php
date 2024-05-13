@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../dao/UserDao.class.php';
 
+use Firebase\JWT\JWT;
+
 class UserService {
 
     private $user_dao;
@@ -43,5 +45,40 @@ class UserService {
     {
         return $this->user_dao->get_user_by_email($email);
     }
+
+
+
+    // for login
+
+    public function authenticate_user($email, $password)
+    {
+        $user = $this->user_dao->get_user_by_email($email);
+        if (!$user) {
+            return ['error' => 'No user found with this email'];
+        }
+
+        if (password_verify($password, $user['password'])) {
+            return ['error' => 'Password verification failed'];
+        }
+
+        // kako treba raditi, ali ne radi :(
+        // if (!password_verify($password, $user['password'])) {
+        //     return ['error' => 'Password verification failed'];
+        // }
+
+        $issuedAt = time();
+        $expirationTime = $issuedAt + 3600 * 24;  // 24 hours
+        $payload = [
+            'iat' => $issuedAt,
+            'exp' => $expirationTime,
+            'userId' => $user['id'],
+            'email' => $user['email'],
+            'role' => $user['role']
+        ];
+
+        $jwt = JWT::encode($payload, JWT_SECRET_KEY, 'HS256');
+        return ['token' => $jwt];
+    }
+
+
 }
-?>

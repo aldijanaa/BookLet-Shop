@@ -35,6 +35,7 @@ Flight::group('/users', function () {
      *     )
      * )
      */
+    //GET ALL USESRS
     Flight::route('GET /all', function () {
         $offset = Flight::request()->query['offset'] ?? 0;
         $limit = Flight::request()->query['limit'] ?? 25;
@@ -66,6 +67,7 @@ Flight::group('/users', function () {
      *     )
      * )
      */
+    //get user by id
     Flight::route('GET /@id', function ($id) {
         $user_service = new UserService();
         $user = $user_service->get_user_by_id($id);
@@ -102,7 +104,7 @@ Flight::group('/users', function () {
      *         response=400,
      *         description="Password must be at least 8 characters long"
      *     )
-     * )
+     * ) 
      */
     Flight::route('POST /add', function () {
 
