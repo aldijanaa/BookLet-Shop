@@ -34,5 +34,10 @@ class BooksService
     {
         $this->books_dao->delete_book_by_id($book_id);
     }
+
+    //search books by title or author
+    public function search_books($search_term) {
+        return $this->books_dao->search_books($search_term);
+    }
 }
 ?>

@@ -1,7 +1,7 @@
 /*Popular collection in home.html*/
 alert("Script execution started. Popular collection TEST!");
 
-$(document).ready(function() {
+$(document).ready(function() { //only will run after dom has been fully loaded  
     loadProducts(); // Load the products initially without filters
 });
 
