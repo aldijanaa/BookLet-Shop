@@ -10,5 +10,6 @@ $openapi = \OpenApi\Generator::scan(['../../../rest', './'], ['pattern' => '*.ph
 // $openapi = \OpenApi\Util::finder(['../../../rest/routes', './'], NULL, '*.php');
 // $openapi = \OpenApi\scan(['../../../rest', './'], ['pattern' => '*.php']);
 
+$openapi = \OpenApi\Generator::scan(['../../../rest', './']);
 header('Content-Type: application/x-yaml');
 echo $openapi->toYaml();

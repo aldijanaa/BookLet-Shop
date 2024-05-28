@@ -15,8 +15,8 @@ let data;  // This will store the fetched books data
 
 function loadBooks() {
     if (!data) {
-        fetch('http://localhost/WEB_Projekat%20sa%20spappom/backend/scripts/get_all_books.php')
-            .then(response => {
+        fetch('backend/books/all?offset=' + currentBookIndex + '&limit=' + booksPerPage)
+        .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok: ' + response.statusText);
                 }

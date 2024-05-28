@@ -20,7 +20,7 @@ Flight::group('/auth', function () {
      *     path="/auth/register",
      *     tags={"Authentication"},
      *     summary="Register a new user",
-     *     description="Registers a new user by accepting mandatory personal details and credentials.",
+     *     description="Registers a new user",
      *     @OA\RequestBody(
      *         required=true,
      *         description="User registration data",
@@ -56,90 +56,28 @@ Flight::group('/auth', function () {
      * )
      */
     Flight::route('POST /register', function() {
+        $data = Flight::request()->data->getData();
         $service = new UserService();
-        $data = Flight::request()->data->getData(); // Get JSON POST data
-    
-        // Check if the required fields are set
-        if (empty($data['first_name']) || empty($data['last_name']) || empty($data['email']) || empty($data['password']) || empty($data['confirm_password'])) {
-            Flight::json(['error' => 'Missing fields'], 400);
-            return;
-        }
-    
-        // Validate email format
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            Flight::json(['error' => 'Invalid email format'], 400);
-            return;
-        }
-    
-        // Check if password and confirm password match
-        if ($data['password'] !== $data['confirm_password']) {
-            Flight::json(['error' => 'Passwords do not match'], 400);
-            return;
-        }
-    
-        // Check if user already exists
-        $existingUser = $service->get_user_by_email($data['email']);
-        if ($existingUser) {
-            Flight::json(['error' => 'User with those credentials already exists, either login or choose other credentials'], 409);
-            return;
-        }
-    
-        // Validate the TLD of the email
-        if (!validateEmailTLD($data['email'])) {
-            Flight::json(['error' => 'Invalid TLD in email address'], 400);
-            return;
-        }
-    
-        // Hash the password
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        $user = [
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => $data['password'] // Store hashed password
-        ];
-    
-        // Try to add a new user
-        try {
-            $result = $service->add_user($user);
-            if ($result) {
-                Flight::json(['message' => 'User registered successfully'], 201); // Created
-            } else {
-                Flight::json(['error' => 'An unexpected error occurred'], 500); // Internal Server Error
-            }
-        } catch (Exception $e) {
-            Flight::json(['error' => 'An unexpected error occurred: ' . $e->getMessage()], 500); // Server error
-        }
+        $result = $service->registerUser($data);
+        
+        Flight::json($result, $result['status'] ?? 200);
     });
     
-    // Function to validate email TLD
-    function validateEmailTLD($email) {
-        $url = 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt'; // Fetching from remote url, can change later
-        $tlds = file($url, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        array_shift($tlds); // Remove the first line
-    
-        $validTLDs = array_map('strtolower', $tlds);
-        $partition = explode('@', $email);
-        $domainPart = explode('.', $partition[1]);
-        $tld = strtolower(end($domainPart));
-    
-        return in_array($tld, $validTLDs);
-    }
-
+  
 
     
    /**
      * @OA\Post(
      *     path="/auth/login",
-     *     summary="Authenticate a user and return a JWT",
+     *     summary="Log in the user and return a JWT",
      *     tags={"Authentication"},
      *     @OA\RequestBody(
      *         description="Credentials needed to login",
      *         required=true,
      *         @OA\JsonContent(
      *             required={"email", "password"},
-     *             @OA\Property(property="email", type="string", format="email", example="johndoe123@gmail.co"),
-     *             @OA\Property(property="password", type="string", format="password", example="emir")
+     *             @OA\Property(property="email", type="string", format="email", example="aldijana@gmail.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="aldijana123")
      *         )
      *     ),
      *     @OA\Response(
@@ -160,25 +98,12 @@ Flight::group('/auth', function () {
      *     )
      * )
      */
-    Flight::route('POST /login', function () {
+    Flight::route('POST /login', function() {
         $data = Flight::request()->data->getData();
-        $email = trim($data['email']);
-        $password = $data['password'];
-    
-        if (empty($email) || empty($password)) {
-            Flight::json(['error' => 'Email and password are required'], 400);
-            return;
-        }
-    
-        $user_service = new UserService();
-        $result = $user_service->authenticate_user($email, $password);
-    
-        if (isset($result['token'])) {
-            Flight::json(['token' => $result['token']]);
-        } else {
-            // Output more detailed error message
-            Flight::json(['error' => $result['error']], 401);
-        }
+        $service = new UserService();
+        $result = $service->login($data['email'], $data['password']);
+        
+        Flight::json($result, $result['status'] ?? 200);
     });
     
 

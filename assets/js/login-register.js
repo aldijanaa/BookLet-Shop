@@ -46,7 +46,7 @@ $(document).on("registrationPageLoaded", function() {
                     confirm_password: confirmPassword
                 };
                 console.log("Submitting data:", userData);
-                fetch('http://localhost/WEB_Projekat%20sa%20spappom/backend/scripts/user_scripts/register_user.php', {
+                fetch('backend/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ $(document).on("registrationPageLoaded", function() {
             if (formValid) {
                 const loginData = { email, password };
                 console.log("Submitting login data:", loginData);
-                fetch('http://localhost/WEB_Projekat%20sa%20spappom/backend/scripts/user_scripts/login_user.php', {
+                fetch('backend/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
