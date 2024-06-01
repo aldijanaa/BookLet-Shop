@@ -4,7 +4,7 @@ require_once __DIR__ . '/BaseDao.class.php';
 class UserDao extends BaseDao {
 
     public function __construct() {
-        parent::__construct("users");
+        parent::__construct("users");  //TABLE NAME
     }
 
     public function get_user_by_id($id) {
@@ -12,7 +12,7 @@ class UserDao extends BaseDao {
     }
     
     public function get_user_by_email($email){
-        return $this->query_unique("SELECT * FROM users WHERE email = :email", ["email" => $email]);
+        return $this->query_unique("SELECT * FROM users WHERE email = :email", ["email" => $email]);  //will only pass one query - unique
     }
 
     public function get_all_users($offset = 0, $limit = 25, $order = "-id"){

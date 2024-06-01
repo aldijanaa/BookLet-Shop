@@ -5,8 +5,8 @@ require_once __DIR__ .  '/vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-function authorize($role = "USER")
-{
+//MIDDLEWARE - AUTHENTICATION, developing logic that will intercept every request and will check is the token sent and are we able to decode that token
+function authorize($role = "USER"){
     $headers = getallheaders();
 
 

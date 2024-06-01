@@ -7,8 +7,7 @@ class BaseDao{
   private $table;
 
   //Making connection to db
-  public function __construct($table)
-  {
+  public function __construct($table){
     $this->table = $table;
     try {
       $this->connection = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8;port=" . DB_PORT, DB_USER, DB_PASS, [
@@ -21,56 +20,26 @@ class BaseDao{
     }
   }
 
-  public function begin_transaction()
-  {
+  public function begin_transaction(){
     $response = $this->connection->beginTransaction();
   }
 
-  public function commit()
-  {
+  public function commit(){
     $this->connection->commit();
   }
 
-  public function rollback()
-  {
+  public function rollback(){
     $response = $this->connection->rollBack();
   }
-  protected function parse_order($order)
-  {
-    // Check if the first character is a minus sign indicating descending order
-    $order_direction = substr($order, 0, 1) == '-' ? 'DESC' : 'ASC';
+  protected function parse_order($order){
+    $order_direction = substr($order, 0, 1) == '-' ? 'DESC' : 'ASC';      // Check if the first character is a minus sign indicating descending order
     
-    // If descending, remove the minus sign to get the column name
-    $order_column = $order_direction == 'DESC' ? substr($order, 1) : $order;
+    $order_column = $order_direction == 'DESC' ? substr($order, 1) : $order;      // If descending, remove the minus sign to get the column name
 
     return [$order_column, $order_direction];
   }
 
-
-
-
-  public function insert($table, $entity)
-  {
-    $query = "INSERT INTO {$table} (";
-    foreach ($entity as $column => $value) {
-      $query .= $column . ", ";
-    }
-    $query = substr($query, 0, -2);
-    $query .= ") VALUES (";
-    foreach ($entity as $column => $value) {
-      $query .= ":" . $column . ", ";
-    }
-    $query = substr($query, 0, -2);
-    $query .= ")";
-
-    $stmt = $this->connection->prepare($query);
-    $stmt->execute($entity); // SQL injection prevention
-    $entity['id'] = $this->connection->lastInsertId();
-    return $entity;
-  }
-
-  protected function execute_update($table, $id, $entity, $id_column = "id")
-  {
+  protected function execute_update($table, $id, $entity, $id_column = "id"){
     $query = "UPDATE {$table} SET ";
     foreach ($entity as $name => $value) {
       $query .= $name . "= :" . $name . ", ";
@@ -83,51 +52,88 @@ class BaseDao{
     $stmt->execute($entity);
   }
 
-  protected function query($query, $params)
-  {
+  protected function query($query, $params){
     $stmt = $this->connection->prepare($query);
     $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  protected function query_unique($query, $params)
-  {
+  protected function query_unique($query, $params){
     $results = $this->query($query, $params);
     return reset($results);
   }
 
-  protected function execute($query, $params)
-  {
+  protected function execute($query, $params){
     $prepared_statement = $this->connection->prepare($query);
-    if ($params) {
-      foreach ($params as $key => $param) {
-        $prepared_statement->bindValue($key, $param);
-      }
-    }
+    foreach ($params as $key => $value) {
+      $prepared_statement->bindValue(":" . $key, $value);
+  }
     $prepared_statement->execute();
     return $prepared_statement;
   }
 
-  public function add($entity)
-  {
+  
+/***************************************************************************************************************/
+public function insert($table, $entity){
+  try{
+      $query = "INSERT INTO {$table} (";
+      foreach($entity as $column => $value){
+        $query .= $column . ", ";
+      }
+      $query = substr($query, 0, -2);
+      $query .= ") VALUES (";
+      foreach($entity as $column => $value){
+        $query .= ":" . $column . ", ";
+      }
+      $query = substr($query, 0, -2);
+      $query .= ")";
+
+      $stmt = $this->connection->prepare($query);
+      $stmt->execute($entity); // SQL injection prevention
+      $entity['id'] = $this->connection->lastInsertId();
+      return $entity;
+
+  }catch(PDOException $e){
+    error_log("Insert SQL error: " . $e->getMessage() . " - Query: " . $query);
+    error_log("Parameters: " . json_encode($entity)); // Log the parameters to check what is being passed
+    throw new Exception("Insert SQL error: " . $e->getMessage());
+  }
+}
+
+  /*public function insert($table, $entity) {
+    try {
+        $columns = implode(", ", array_keys($entity));
+        $values = ":" . implode(", :", array_keys($entity));
+        $query = "INSERT INTO {$table} ({$columns}) VALUES ({$values})";
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();  // Executes the SQL statement with bound parameters
+        $entity['id'] = $this->connection->lastInsertId(); // Retrieves the last insert ID
+        return $entity;
+    } catch (PDOException $e) {
+        error_log("Insert SQL error: " . $e->getMessage() . " - Query: " . $query);
+        error_log("Parameters: " . json_encode($entity)); // Log the parameters to check what is being passed
+        throw new Exception("Insert SQL error: " . $e->getMessage());
+    }
+}*/
+
+
+  public function add($entity){   //zove insert odozgo
     return $this->insert($this->table, $entity);
   }
 
-  public function update($id, $entity)
-  {
+  public function update($id, $entity){
     $this->execute_update($this->table, $id, $entity);
   }
 
-  public function get_by_id($id)
-  {
+  public function get_by_id($id){
     return $this->query_unique("SELECT * FROM " . $this->table . " WHERE id = :id", ["id" => $id]);
   }
 
-  public function get_all($offset = 0, $limit = 25, $order = "id") // Changed -id to id
-{
-  list($order_column, $order_direction) = self::parse_order($order);
+  public function get_all($offset = 0, $limit = 25, $order = "id"){
+    list($order_column, $order_direction) = self::parse_order($order);
 
-  return $this->query("SELECT *
+    return $this->query("SELECT *
                        FROM " . $this->table . "
                        ORDER BY {$order_column} {$order_direction}
                        LIMIT {$limit} OFFSET {$offset}", []);

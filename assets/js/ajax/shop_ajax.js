@@ -1,25 +1,22 @@
 $(document).on("shopPageLoaded", function() {
-    // Load initial set of books
-    loadBooks();
+    loadBooks();     // Load initial set of books
 
-    // Setup infinite scrolling to load more books
-    setupInfiniteScrolling();
+    setupInfiniteScrolling();  // Setup infinite scrolling to load more books
 
-    // Setup interactions for modals and other UI elements
-    setupInteractions();
+    setupInteractions();      // Setup interactions for modals and other UI elements
 });
 
 let currentBookIndex = 0;
-const booksPerPage = 10;
+const booksPerPage = 11;
 let data;  // This will store the fetched books data
 
 function loadBooks() {
     if (!data) {
-        fetch('backend/books/all?offset=' + currentBookIndex + '&limit=' + booksPerPage)
+        fetch('backend/books/all?offset=' + currentBookIndex + '&limit=' + booksPerPage)  //works
         .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok: ' + response.statusText);
-                }
+                }      
                 return response.json();
             })
             .then(fetchedData => {
@@ -28,14 +25,13 @@ function loadBooks() {
             })
             .catch(error => console.error('Error loading book data:', error));
     } else {
-        displayBooks();
+        displayBooks();  
     }
 }
 
 
 function displayBooks() {
     const productList = $('.grid-list');
-    // If data is an array, use it directly. Remove `data.books`.
     const booksToLoad = data.slice(currentBookIndex, currentBookIndex + booksPerPage);
     booksToLoad.forEach(book => {
         const bookHTML = createBookHTML(book);
@@ -82,14 +78,44 @@ function setupInfiniteScrolling() {
     });
 }
 
-function setupInteractions() {
+
+// At the top of the shop_ajax.js file
+function updateCartIcon(count) {
+    $('#cart-icon-count').text(count);
+}
+
+function fetchCartCount() {
+    $.ajax({
+        url: 'backend/user/40/cart/count', // Adjust the user ID as needed
+        method: 'GET',
+        success: function(response) {
+            updateCartIcon(response.count);
+        },
+        error: function() {
+            console.error('Failed to fetch cart count.');
+        }
+    });
+}
+// Update the setupInteractions() function
+/*function setupInteractions() {
+    // Interactions for each product card, delegate the event from the static parent
+    $(document).on('click', '.grid-list .add-to-cart-btn', function(event) {
+        const bookId = $(this).data('book-id');
+        addToCart(bookId, 1); // Assuming quantity is always 1 for now
+    });
+}*/
+
+// Setup interactions for the product cards
+/*function setupInteractions() {
     const modal = $("#bookDetailModal");
     
     // Interactions for each product card, delegate the event from the static parent
     $(document).on('click', '.grid-list .action-btn', function(event) {
         const bookId = $(this).data('book-id');
-        // Since `data` variable is an array now, we access it directly.
-        const book = data.find(b => b.id == bookId); // Ensure the type matches, == instead of ===
+        const action = $(this).data('action');
+
+
+        const book = data.find(b => b.id === parseInt(bookId, 10)); // Ensures both are of type number
 
         if (book) {
             if ($(this).attr('aria-label') === "quick view") {
@@ -99,7 +125,15 @@ function setupInteractions() {
             }
             // Add more interactions as needed
         }
+
+
+        // Handle the 'add to cart' action  
+        if (action === 'add-to-cart') {
+            addToCart(bookId, 1); 
+        }
+
     });
+
     // Close the modal when the 'x' button is clicked
     modal.find(".close").on('click', function() {
         modal.hide();
@@ -122,13 +156,49 @@ function setupInteractions() {
                 showModal(book);
             } else if ($(this).attr('aria-label') === "add to wishlist") {
                 addToWishlist(book);
+            }else if ($(this).attr('aria-label') === "add to cart") {
+                addToCart(bookId, 1);
             }
-            // Add more interactions as needed
+        }
+    });
+}*/
+// In the document ready block
+$(document).ready(function () {
+    fetchCartCount(); // Initialize the cart count when the page is ready
+});
+
+// Setup interactions for the product cards
+function setupInteractions() {
+    $(document).on('click', '.product-card .action-btn', function() {
+        const action = $(this).attr('aria-label');
+        const bookId = $(this).data('book-id');
+
+        if (action === "add to cart") {
+            addToCart(bookId, 42); // Assumes quantity is always 1 for simplicity  - ZA SADA
         }
     });
 }
 
-function showModal(book) { 
+
+//Add to cart function
+function addToCart(bookId, quantity) {
+    $.ajax({
+        url: 'backend/add-to-cart',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ book_id: bookId, quantity: quantity, user_id: 40 }), // Change as per your user session management
+        success: function(response) {
+            alert('Item successfully added to cart!');
+            fetchCartCount(); // Refresh the cart count
+        },
+        error: function() {
+            alert('Failed to add item to cart.');
+        }
+    });
+}
+
+
+/*function showModal(book) { 
     const modal = $("#bookDetailModal");
     // Update modal content with book details
     modal.find(".modal-book-image").attr("src", book.image).attr("alt", book.title);
@@ -165,4 +235,4 @@ $(document).ready(function () {
     if (window.location.hash === '#shop') {
         $(document).trigger("shopPageLoaded");
     }
-});
+});*/

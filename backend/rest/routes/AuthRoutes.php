@@ -1,7 +1,14 @@
+
 <?php
 
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 require_once __DIR__ . '/../services/UserService.class.php';
-Flight::group('/auth', function () {
+
+
+
+
+Flight::group('/auth', function () {   //grouping routes so that we can use the same prefix for all routes - auth
 
 
     Flight::route('GET /all', function () {
@@ -57,7 +64,7 @@ Flight::group('/auth', function () {
      */
     Flight::route('POST /register', function() {
         $data = Flight::request()->data->getData();
-        $service = new UserService();
+        $service = new UserService(); //CREATING OBJECT OF USER SERVICE
         $result = $service->registerUser($data);
         
         Flight::json($result, $result['status'] ?? 200);
@@ -99,13 +106,46 @@ Flight::group('/auth', function () {
      * )
      */
     Flight::route('POST /login', function() {
-        $data = Flight::request()->data->getData();
+        $data = Flight::request()->data->getData();  //getting payload data that has been sent through the request
         $service = new UserService();
+
         $result = $service->login($data['email'], $data['password']);
-        
         Flight::json($result, $result['status'] ?? 200);
     });
-    
+
+
+
+   
+
+     //We want user to be authenticated in order to trigger this logout route   --- ovo ne radi još
+    /*Flight::route('POST /logout', function() {
+        $data = Flight::request()->data->getData();  //getting payload data that has been sent through the request
+        $service = new UserService();
+
+        try{
+            $token = Flight::request()->getHeader('Authentication');
+            if(!$token){
+                throw new Exception("Token is missing");
+            }
+
+            $decoded_token = JWT::decode($token, new Key(JWT_SECRET_KEY . 'ss', 'HS256'));
+            Flight::json([
+                'jwt_decoded'=> $decoded_token,
+                'user'=>$decoded_token->user
+            ]);
+
+        }catch(\Exception $e){
+            Flight::halt(401, 'Invalid token');
+        }
+    });*/
+
+    //Setting up a route to check if user is logged in
+    /*Flight::route('GET /auth/status', function() {
+        $service = new UserService();
+
+        $result = $service->checkLoginStatus();
+        Flight::json($result);
+    });*/
 
 
 });

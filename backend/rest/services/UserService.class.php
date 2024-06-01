@@ -2,6 +2,10 @@
 require_once __DIR__ . '/../dao/UserDao.class.php';
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+
+session_start();  // Start the session at the beginning of the script
 
 class UserService {
 
@@ -16,7 +20,7 @@ class UserService {
     }
 
     public function get_all_users($offset = 0, $limit = 25, $order = "id") {
-        return $this->user_dao->get_all($offset, $limit, $order);
+        return $this->user_dao->get_all_users($offset, $limit, $order);
     }
 
 
@@ -117,7 +121,6 @@ class UserService {
             return;
         }
 
-
         //Check does that email exist in db
         $user = $this->user_dao->get_user_by_email($email);
         if (!$user) {
@@ -128,36 +131,57 @@ class UserService {
         if (!password_verify($password, $user['password'])) {
             return ['success' => false,'message' => 'Password verification failed'];
         }
-
-        // Check if username is reserved, npr'admin'
-        /*if (strtolower($username) === 'admin') {
-            Flight::json(['success' => false, 'message' => 'The username is reserved']);
-            return;
-        }*/
         
-        $issuedAt = time();
+        // Generate JWT
+        $issuedAt = time();  // Current time
         $expirationTime = $issuedAt + 3600 * 24;  // jwt validity: 24 hours
         $payload = [
             'iat' => $issuedAt,
             'exp' => $expirationTime,
-            'userId' => $user['id'],
-            'email' => $user['email'],
+            'user_id' => $user['id'],
+            'user' => $user,
             'role' => $user['role']
         ];
-    
-        $jwt = JWT::encode($payload, JWT_SECRET_KEY, 'HS256');
+       
+        $jwt = JWT::encode($payload, JWT_SECRET_KEY, 'HS256');   //creating jwt token, HS256 is the algorithm used to encode the token
+        
+        // Store JWT in a session
+        $_SESSION['jwt'] = $jwt;
+
         return ['message'=> 'Successfuly logged in', 'jwt-token' => $jwt];
     }
 
 
+    //Function to check if user is logged in
+    public function checkLoginStatus() {
+        //session_start(); // Ensure session start at the beginning of script if not already started
+        
+        if (isset($_SESSION['jwt'])) {
+            $jwt = $_SESSION['jwt'];
+            try {
+                // Decode the JWT to verify its validity
+                $decoded_jwt = JWT::decode($jwt, new Key(JWT_SECRET_KEY, 'HS256'));
 
-       /*public function update_user($user_id, $user) {
+
+                if ($decoded_jwt->exp >= time()) {
+                    return ['logged_in' => true];
+                }
+            } catch (Exception $e) {
+                // Handle expired token or any error during JWT decoding
+                return ['logged_in' => false];
+            }
+        }
+        return ['logged_in' => false];
+    }
+
+
+    public function update_user($user_id, $user) {
         // If the password is being updated, hash it
         if (isset($user['password'])) {
             $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
         }
         $this->user_dao->update_user($user_id, $user);
-    }*/
+    }
 
     public function delete_user_by_id($user_id) {
         return $this->user_dao->delete_user_by_id($user_id);

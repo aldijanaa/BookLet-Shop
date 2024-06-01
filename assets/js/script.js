@@ -79,3 +79,52 @@ window.onclick = function(event) {
     }
   }
 }
+function updateUserIcon() {
+  $.ajax({
+      url: 'backend/auth/status', // Endpoint to check if the user is logged in
+      type: 'GET',
+      success: function(response) {
+          const container = document.getElementById('userIconContainer');
+          if (response.logged_in) {
+              container.innerHTML = `
+                  <div class="dropdown">
+                      <button onclick="myFunction()" class="dropbtn">Profile</button>
+                      <div id="myDropdown" class="dropdown-content">
+                          <a href="#profile">My Profile</a>
+                          <a href="#logout" onclick="logout()">Logout</a>
+                      </div>
+                  </div>`;
+          } else {
+              container.innerHTML = `
+                  <a href="#login" class="header-action-btn" title="Login">
+                      <ion-icon name="person-outline"></ion-icon>
+                      <span>Login</span>
+                  </a>`;
+          }
+      },
+      error: function() {
+          console.log('Error checking login status');
+      }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateUserIcon();
+});
+
+
+function logout() {
+  $.ajax({
+      url: 'backend/auth/logout', // Assuming you have a logout endpoint that clears the session
+      type: 'POST',
+      success: function() {
+          localStorage.removeItem('jwtToken'); // Clear JWT token if you stored it in local storage
+          window.location.href = '#login'; // Redirect to login page or home
+          updateUserIcon(); // Update UI elements
+      },
+      error: function() {
+          console.log('Error logging out');
+      }
+  });
+}
+

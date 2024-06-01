@@ -57,19 +57,11 @@
           <button class="btn btn-primary" id="searchButton" >Search</button>
         </div>
 
-        <!--Cart icon action in header-->
+        <!--Cart icon action in header OVO BROJI KOLIKO IMA ITEMS U CARTU!!!-->
         <div class="header-action">
           <button class="header-action-btn" aria-label="cart" title="Cart" onclick="window.location.hash='#cart'">  <!--aria label mozda ovdje ne treba, provjeriti-->
             <span class="span">0</span>   <!--currently 0 element in cart-->
             <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon> <!--icon for cart-->
-          </button>
-
-
-       <!--<div class="header-action">
-          <button class="header-action-btn" aria-label="cart" title="favs" onclick="window.location.hash='#cart'"> 
-            <span class="span">0</span>  
-            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>-->
-         
           </button>
 
           <!--icon used for when in mobile view -->
@@ -87,6 +79,11 @@
 
         </div>
 
+        <div class="user-icon-container" id="userIconContainer">
+          <!-- Dynamic content will be loaded here based on login status -->
+        </div>
+
+        
       </div>
     </div>
 
@@ -200,7 +197,9 @@
 <script src="./assets/js/ajax/index_featured_collection_ajax.js"></script>
 <script src="./assets/js/ajax/index_ajax.js"></script>
 <script src="./assets/js/ajax/shop_ajax.js"></script>
+
 <script src="./assets/js/ajax/cart_ajax.js"></script>
+
 <!--<script src="./assets/js/ajax/register_login_ajax.js"></script>-->
 
 
@@ -262,7 +261,7 @@ $(function () {
           load: "login.html",
           onCreate: function() {
               // Add 'login-page' class to body
-              $('head').append('<link rel="stylesheet" href="./assets/css/login.css" type="text/css" />');
+              $('head').append('<link rel="stylesheet" href="./assets/css/login-register.css" type="text/css" />');
               $('body').addClass('login-page');
               $(document).trigger("registrationPageLoaded");
 

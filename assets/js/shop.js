@@ -1,8 +1,8 @@
 // Toggle the dropdown menu
-customSelect.addEventListener('click', function(event) {
+/*customSelect.addEventListener('click', function(event) {
   event.stopPropagation(); // Stop the click event from bubbling up
   customSelectOptions.style.display = customSelectOptions.style.display === 'block' ? 'none' : 'block';
-});
+});*/
 
 // Update the selected value and close the dropdown
 /*customSelectOptions.addEventListener('click', function(event) {

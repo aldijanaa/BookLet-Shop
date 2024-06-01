@@ -1,16 +1,40 @@
 <?php
 
 require_once __DIR__ . '/../services/UserService.class.php';
+require_once __DIR__ . '/MiddlewareRoutes.php';
 
-Flight::group('/users', function () {
+
+Flight::group('/users', function () {  
 
 
+    //GET ALL USESRS
+    Flight::route('GET /all', function () {
+
+
+
+
+        error_log("Accessing all users");
+        $offset = Flight::request()->query['offset'] ?? 0;
+        $limit = Flight::request()->query['limit'] ?? 25;
+        $order = Flight::request()->query['order'] ?? 'id';
+
+        $user_service = new UserService();
+        $users = $user_service->get_all_users($offset, $limit, $order);
+        error_log("Printing users and calling service, ima li problema ovdje??");
+
+        Flight::json($users);
+        error_log($users);
+
+    });
 
     /**
-     * @OA\Get(
-     *     path="/users/all",
-     *     tags={"Users"},
-     *     summary="Get all users",
+    * @OA\Get(
+    *     path="/users/all",
+    *     tags={"Users"},
+    *     summary="Get all users",
+    *     security={
+    *         {"ApiKey": {}}
+    *      },
      *     @OA\Parameter(
      *         name="offset",
      *         in="query",
@@ -35,15 +59,22 @@ Flight::group('/users', function () {
      *     )
      * )
      */
-    //GET ALL USESRS
-    Flight::route('GET /all', function () {
-        $offset = Flight::request()->query['offset'] ?? 0;
-        $limit = Flight::request()->query['limit'] ?? 25;
-        $order = Flight::request()->query['order'] ?? 'id';
+
+
+    //Route to get a user by ID
+    Flight::route('GET /@id', function ($id) {
         $user_service = new UserService();
-        $users = $user_service->get_all_users($offset, $limit, $order);
-        Flight::json($users);
-    });
+        $user = $user_service->get_user_by_id($id);
+
+        /*if ($user) {
+            Flight::json([$user, 'message' => "User found"]);
+        } else {
+            Flight::halt(404, 'User not found');
+        }*/
+
+        Flight::json($user, 200);
+
+    },true);  // 'true' indicates this route requires JWT authentication
 
 
     /**
@@ -51,6 +82,9 @@ Flight::group('/users', function () {
      *     path="/users/{id}",
      *     tags={"Users"},
      *     summary="Get user by ID",
+     *     security={
+     *       {"ApiKey": {}}
+     *      },
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -67,18 +101,17 @@ Flight::group('/users', function () {
      *     )
      * )
      */
-    //get user by id
-    Flight::route('GET /@id', function ($id) {
+
+     //Route to add a new user --> DOESN'T NEED JWT AUTHENTICATION
+     Flight::route('POST /add', function () {
+        $data = Flight::request()->data->getData();
         $user_service = new UserService();
-        $user = $user_service->get_user_by_id($id);
-        if ($user) {
-            Flight::json($user);
-        } else {
-            Flight::halt(404, 'User not found');
-        }
+
+        $user = $user_service->registerUser($data);
+        Flight::json($user, 201);
     });
 
- 
+
      /**
      * @OA\Post(
      *     path="/users/add",
@@ -106,30 +139,25 @@ Flight::group('/users', function () {
      *     )
      * ) 
      */
-    Flight::route('POST /add', function () {
 
+
+    //Route to update user information
+     Flight::route('PUT /update/@id', function ($id) {
         $data = Flight::request()->data->getData();
-
-
-        $password = $data["password"];
-
-        if (strlen($password) < 8)  {
-            Flight::halt(400, 'Password must be at least 8 characters long');
-        }
-
-            
-
         $user_service = new UserService();
-        $user = $user_service->add_user($data);
-        Flight::json($user, 201);
-    });
 
+        $user_service->update_user($id, $data);
+        Flight::json(['message' => "User successfully updated"], 201);
+    }, true); // Requires JWT authentication
 
     /**
      * @OA\Put(
      *     path="/users/update/{id}",
      *     tags={"Users"},
      *     summary="Update user information",
+     *     security={
+     *      {"ApiKey": {}}
+     *      },
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -153,12 +181,20 @@ Flight::group('/users', function () {
      *     )
      * )
      */
-    Flight::route('PUT /update/@id', function ($id) {
-        $data = Flight::request()->data->getData();
+
+    //Route to delete a user
+    Flight::route('DELETE /delete/@id', function ($id) {
         $user_service = new UserService();
-        $user_service->update_user($id, $data);
-        Flight::json(['message' => "User successfully updated"], 201);
-    });
+        $user = $user_service->delete_user_by_id($id);
+
+        /*if ($success) {
+            Flight::json(['message' => "User successfully deleted"], 201);
+        } else {
+            Flight::halt(500, 'User not found or could not be deleted');
+        }*/
+        Flight::json($user, 200);
+
+    }, true); // Requires JWT authentication
 
 
      /**
@@ -166,6 +202,9 @@ Flight::group('/users', function () {
      *     path="/users/delete/{id}",
      *     tags={"Users"},
      *     summary="Delete a user",
+     *     security={
+     *      {"ApiKey": {}}
+     *   },
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -182,22 +221,31 @@ Flight::group('/users', function () {
      *     )
      * )
      */
-    Flight::route('DELETE /delete/@id', function ($id) {
+   
+     //Route to get a user by email
+     Flight::route('GET /email/@email', function ($email) {
         $user_service = new UserService();
-        $success = $user_service->delete_user_by_id($id);
-        if ($success) {
-            Flight::json(['message' => "User successfully deleted"], 201);
-        } else {
-            Flight::halt(404, 'User not found or could not be deleted');
-        }
-    });
 
+        $user = $user_service->get_user_by_email($email);
+        /*if ($user) {
+            Flight::json($user);
+        } else {
+            Flight::halt(500, 'User not found');
+        }*/
+        Flight::json($user, 200);
+
+    }, true);
+
+    
 
      /**
      * @OA\Get(
      *     path="/users/email/{email}",
      *     tags={"Users"},
      *     summary="Get user by email",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *     @OA\Parameter(
      *         name="email",
      *         in="path",
@@ -214,14 +262,10 @@ Flight::group('/users', function () {
      *     )
      * )
      */
-    Flight::route('GET /email/@email', function ($email) {
-        $user_service = new UserService();
-        $user = $user_service->get_user_by_email($email);
-        if ($user) {
-            Flight::json($user);
-        } else {
-            Flight::halt(404, 'User not found');
-        }
-    });
+ 
+
+
 
 });
+
+Flight::start();
