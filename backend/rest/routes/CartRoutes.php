@@ -3,8 +3,6 @@ require_once __DIR__ . '/../services/CartService.class.php';
 require_once __DIR__ . '/MiddlewareRoutes.php';
 
 
-
-
 Flight::route('GET /cart/@id', function($id){
     $service = new CartService();
     $cart_item = $service->get_cart_item_by_id($id);
@@ -270,11 +268,3 @@ Flight::route('PUT /cart/@id/quantity', function($id){
  *     )
  * )
  */
-
-
-
-
-
-
-
-Flight::start();

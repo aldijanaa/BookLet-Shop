@@ -1,22 +1,14 @@
-
 <?php
-
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 require_once __DIR__ . '/../services/UserService.class.php';
 
 
-
-
-Flight::group('/auth', function () {   //grouping routes so that we can use the same prefix for all routes - auth
+Flight::group('/auth', function () {   
 
 
     Flight::route('GET /all', function () {
-        $offset = Flight::request()->query['offset'] ?? 0;
-        $limit = Flight::request()->query['limit'] ?? 25;
         $order = Flight::request()->query['order'] ?? 'id';
         $user_service = new UserService();
-        $users = $user_service->get_all_users($offset, $limit, $order);
+        $users = $user_service->get_all_users($order);
         Flight::json($users);
     });
 

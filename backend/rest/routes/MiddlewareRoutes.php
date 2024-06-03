@@ -7,9 +7,8 @@ use Firebase\JWT\Key;
 Flight::route('/*', function() {   //$role = "USER" is default role for all routes
     // Token is not needed for login or register page, because these two routes are used to authorize the user and get the token
     if (
-        // strpos(Flight::request()->url, '/auth/login') === 0 ||
-        // strpos(Flight::request()->url, '/auth/register') === 0
-        true
+         strpos(Flight::request()->url, '/auth/login') === 0 ||
+         strpos(Flight::request()->url, '/auth/register') === 0
     ){ 
         return TRUE;   //don't want to authenticate 
     } else {
@@ -38,7 +37,6 @@ Flight::route('/*', function() {   //$role = "USER" is default role for all rout
 //log all errors to file 
 Flight::map('error', function($e) {
     file_put_contents('logs.txt', $e.PHP_EOL , FILE_APPEND | LOCK_EX);
-
     Flight::halt($e->getCode(), $e->getMessage());
     Flight::stop($e->getCode());
 });

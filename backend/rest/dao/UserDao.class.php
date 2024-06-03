@@ -1,23 +1,29 @@
 <?php
 require_once __DIR__ . '/BaseDao.class.php';
 
-class UserDao extends BaseDao {
+class UserDao extends BaseDao { 
 
-    public function __construct() {
+    public function __construct() {     
         parent::__construct("users");  //TABLE NAME
     }
 
     public function get_user_by_id($id) {
-        return $this->query_unique("SELECT * FROM users WHERE id = :id", ["id" => $id]);
+        return $this->query_unique("SELECT * FROM users WHERE id = :id", ["id" => $id]); 
     }
     
     public function get_user_by_email($email){
         return $this->query_unique("SELECT * FROM users WHERE email = :email", ["email" => $email]);  //will only pass one query - unique
     }
 
-    public function get_all_users($offset = 0, $limit = 25, $order = "-id"){
+    /*public function get_all_users($offset = 0, $limit = 25, $order = "-id"){
         list($order_column, $order_direction) = self::parse_order($order);
         return $this->query("SELECT * FROM users ORDER BY {$order_column} {$order_direction} LIMIT {$limit} OFFSET {$offset}", []);
+    }*/
+
+    public function get_all_users($order = "-id")
+    {
+        list($order_column, $order_direction) = self::parse_order($order);
+        return $this->query("SELECT * FROM users ORDER BY {$order_column} {$order_direction}", []);
     }
     
 
@@ -30,8 +36,11 @@ class UserDao extends BaseDao {
     }
 
     public function delete_user_by_id($id) {
-        return $this->execute("DELETE FROM users WHERE id = :id", ["id" => $id]);
+        $stmt = $this->connection->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->rowCount(); // Returns the number of affected rows
     }
+    
 
   
 }

@@ -9,8 +9,8 @@ session_start();  // Start the session at the beginning of the script
 
 class UserService {
 
-    private $user_dao;
-
+    private $user_dao; 
+    
     public function __construct() {
         $this->user_dao = new UserDao();
     }
@@ -19,9 +19,10 @@ class UserService {
         return $this->user_dao->get_user_by_id($user_id);
     }
 
-    public function get_all_users($offset = 0, $limit = 25, $order = "id") {
-        return $this->user_dao->get_all_users($offset, $limit, $order);
+    public function get_all_users($order = "-id"){
+        return $this->user_dao->get_all_users($order);
     }
+
 
 
 
@@ -57,7 +58,7 @@ class UserService {
            return ['success' => false, 'message' => 'Invalid TLD in email address'];
         }
 
-            // Validate MX (Mail Exchange) records  -- dio poslije @ se gleda kao mx record npr. @stu.ibu.edu.ba
+        // Validate MX (Mail Exchange) records  -- dio poslije @ se gleda kao mx record npr. @stu.ibu.edu.ba
         $domain = substr(strrchr($data['email'], "@"), 1);
         if (!$this->validateMXRecords($domain)) {
             Flight::json(['success' => false,"message" => "No MX records found for domain: $domain"]);
@@ -176,11 +177,12 @@ class UserService {
 
 
     public function update_user($user_id, $user) {
+
         // If the password is being updated, hash it
         if (isset($user['password'])) {
             $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
         }
-        $this->user_dao->update_user($user_id, $user);
+        return $this->user_dao->update_user($user_id, $user);
     }
 
     public function delete_user_by_id($user_id) {
