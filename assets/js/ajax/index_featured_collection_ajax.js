@@ -3,6 +3,7 @@ $(document).on("booksPageLoaded", function () {
 	waitForElement(".featured .grid-list", loadFeaturedBooks);
 });
 
+
 // Function to load featured books and append them to the productList
 function loadFeaturedBooks() {
     fetch('./data/index_featured_collection.json')  //mijenjati rutu u backendu!!!!

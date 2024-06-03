@@ -194,22 +194,22 @@
 
 
 <!--AJAX CALLS-->
-<script src="./assets/js/ajax/index_featured_collection_ajax.js"></script>
+<!--<script src="./assets/js/ajax/index_featured_collection_ajax.js"></script>
 <script src="./assets/js/ajax/index_ajax.js"></script>
-<script src="./assets/js/ajax/shop_ajax.js"></script>
+<script src="./assets/js/ajax/shop_ajax.js"></script>-->
 
-<script src="./assets/js/ajax/cart_ajax.js"></script>
+<!--<script src="./assets/js/ajax/cart_ajax.js"></script>-->
 
-<!--<script src="./assets/js/ajax/register_login_ajax.js"></script>-->
+
 
 
 
   
 
   <!--Importing JS -->
-  <script src="./assets/js/script.js"></script>
+  <!--<script src="./assets/js/script.js"></script>
   <script src="./assets/js/shop.js"></script>
-  <script src="./assets/js/cart.js"></script>
+  <script src="./assets/js/cart.js"></script>-->
   <script src="./assets/js/login-register.js"></script>
   <script src="./assets/js/search-button.js"></script>
 
@@ -263,14 +263,14 @@ $(function () {
               // Add 'login-page' class to body
               $('head').append('<link rel="stylesheet" href="./assets/css/login-register.css" type="text/css" />');
               $('body').addClass('login-page');
-              $(document).trigger("registrationPageLoaded");
-
-              //$(document).trigger("registrationPageLoaded"); // Trigger the custom event when the login view is created
+              
+              $(document).trigger("loginFormLoaded"); // Custom event after form is loaded
+              $(document).trigger("registrationFormLoaded"); 
 
           },
           onUnload: function() {
-              // Remove 'login-page' class from body when navigating away from login
-              $('body').removeClass('login-page');
+              $('body').removeClass('login-page');    // Remove 'login-page' class from body when navigating away from login
+
           }
       });
 
