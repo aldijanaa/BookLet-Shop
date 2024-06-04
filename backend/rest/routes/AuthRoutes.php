@@ -1,15 +1,20 @@
 <?php
-
 require_once __DIR__ . '/../services/UserService.class.php';
-Flight::group('/auth', function () {
+require_once dirname(__FILE__) . "/../../config.php";
+
+
+
+use Firebase\JWT\JWT; // Import the JWT class
+use Firebase\JWT\Key;
+
+
+Flight::group('/auth', function () {   
 
 
     Flight::route('GET /all', function () {
-        $offset = Flight::request()->query['offset'] ?? 0;
-        $limit = Flight::request()->query['limit'] ?? 25;
         $order = Flight::request()->query['order'] ?? 'id';
         $user_service = new UserService();
-        $users = $user_service->get_all_users($offset, $limit, $order);
+        $users = $user_service->get_all_users($order);
         Flight::json($users);
     });
 
@@ -20,7 +25,7 @@ Flight::group('/auth', function () {
      *     path="/auth/register",
      *     tags={"Authentication"},
      *     summary="Register a new user",
-     *     description="Registers a new user by accepting mandatory personal details and credentials.",
+     *     description="Registers a new user",
      *     @OA\RequestBody(
      *         required=true,
      *         description="User registration data",
@@ -56,90 +61,28 @@ Flight::group('/auth', function () {
      * )
      */
     Flight::route('POST /register', function() {
-        $service = new UserService();
-        $data = Flight::request()->data->getData(); // Get JSON POST data
-    
-        // Check if the required fields are set
-        if (empty($data['first_name']) || empty($data['last_name']) || empty($data['email']) || empty($data['password']) || empty($data['confirm_password'])) {
-            Flight::json(['error' => 'Missing fields'], 400);
-            return;
-        }
-    
-        // Validate email format
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            Flight::json(['error' => 'Invalid email format'], 400);
-            return;
-        }
-    
-        // Check if password and confirm password match
-        if ($data['password'] !== $data['confirm_password']) {
-            Flight::json(['error' => 'Passwords do not match'], 400);
-            return;
-        }
-    
-        // Check if user already exists
-        $existingUser = $service->get_user_by_email($data['email']);
-        if ($existingUser) {
-            Flight::json(['error' => 'User with those credentials already exists, either login or choose other credentials'], 409);
-            return;
-        }
-    
-        // Validate the TLD of the email
-        if (!validateEmailTLD($data['email'])) {
-            Flight::json(['error' => 'Invalid TLD in email address'], 400);
-            return;
-        }
-    
-        // Hash the password
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        $user = [
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => $data['password'] // Store hashed password
-        ];
-    
-        // Try to add a new user
-        try {
-            $result = $service->add_user($user);
-            if ($result) {
-                Flight::json(['message' => 'User registered successfully'], 201); // Created
-            } else {
-                Flight::json(['error' => 'An unexpected error occurred'], 500); // Internal Server Error
-            }
-        } catch (Exception $e) {
-            Flight::json(['error' => 'An unexpected error occurred: ' . $e->getMessage()], 500); // Server error
-        }
+        $data = Flight::request()->data->getData();
+        $service = new UserService(); //CREATING OBJECT OF USER SERVICE
+        $result = $service->registerUser($data);
+        
+        Flight::json($result, $result['status'] ?? 200);
     });
     
-    // Function to validate email TLD
-    function validateEmailTLD($email) {
-        $url = 'https://data.iana.org/TLD/tlds-alpha-by-domain.txt'; // Fetching from remote url, can change later
-        $tlds = file($url, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        array_shift($tlds); // Remove the first line
-    
-        $validTLDs = array_map('strtolower', $tlds);
-        $partition = explode('@', $email);
-        $domainPart = explode('.', $partition[1]);
-        $tld = strtolower(end($domainPart));
-    
-        return in_array($tld, $validTLDs);
-    }
-
+  
 
     
    /**
      * @OA\Post(
      *     path="/auth/login",
-     *     summary="Authenticate a user and return a JWT",
+     *     summary="Log in the user and return a JWT",
      *     tags={"Authentication"},
      *     @OA\RequestBody(
      *         description="Credentials needed to login",
      *         required=true,
      *         @OA\JsonContent(
      *             required={"email", "password"},
-     *             @OA\Property(property="email", type="string", format="email", example="johndoe123@gmail.co"),
-     *             @OA\Property(property="password", type="string", format="password", example="emir")
+     *             @OA\Property(property="email", type="string", format="email", example="aldijana@gmail.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="aldijana123")
      *         )
      *     ),
      *     @OA\Response(
@@ -160,27 +103,58 @@ Flight::group('/auth', function () {
      *     )
      * )
      */
-    Flight::route('POST /login', function () {
-        $data = Flight::request()->data->getData();
-        $email = trim($data['email']);
-        $password = $data['password'];
-    
-        if (empty($email) || empty($password)) {
-            Flight::json(['error' => 'Email and password are required'], 400);
+    Flight::route('POST /login', function() {
+        $data = Flight::request()->data->getData();  //getting payload data that has been sent through the request
+        $service = new UserService();
+
+        $result = $service->login($data['email'], $data['password']);
+        Flight::json($result, $result['status'] ?? 200);
+    });
+
+
+
+    /**
+     * @OA\Post(
+     *     path="/auth/logout",
+     *     summary="Logs out the user",
+     *     tags={"Authentication"},
+     *     description="Invalidate the user's session by advising the client to delete the JWT.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully logged out"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized access"
+     *     )
+     * )
+     */
+
+     
+     // Allow logout without token validation (token validation happens on client-side in most simple way)
+     Flight::route('POST /logout', function() {
+        $token = Flight::request()->getHeader('Authentication'); // Check the correct header key based on your client setup
+        
+        if(!$token) {
+            Flight::json(['message' => 'No token provided, nothing to logout.'], 400);
             return;
         }
+
+        try {
+            $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET_KEY(), 'HS256'));  // Optionally decode and log the logout if necessary:
+                // Log logout action  into a file
+            file_put_contents('logs.txt', 'User ' . $decoded_token->user->email . ' logged out at ' . date('Y-m-d H:i:s') . PHP_EOL, FILE_APPEND | LOCK_EX);
     
-        $user_service = new UserService();
-        $result = $user_service->authenticate_user($email, $password);
+            // Respond to client to remove the token:
+            Flight::json(['message' => 'Logged out successfully. Please remove the token on the client side.'], 200);
     
-        if (isset($result['token'])) {
-            Flight::json(['token' => $result['token']]);
-        } else {
-            // Output more detailed error message
-            Flight::json(['error' => $result['error']], 401);
+        } catch (\Exception $e) {
+            Flight::halt(401, 'Unauthorized - ' . $e->getMessage());
         }
     });
-    
+
+
+
 
 
 });

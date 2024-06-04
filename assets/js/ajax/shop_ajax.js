@@ -1,49 +1,41 @@
 $(document).on("shopPageLoaded", function() {
-    // Load initial set of books
-    loadBooks();
-
-    // Setup infinite scrolling to load more books
-    setupInfiniteScrolling();
-
-    // Setup interactions for modals and other UI elements
-    setupInteractions();
+    loadBooks(); 
 });
 
-let currentBookIndex = 0;
-const booksPerPage = 10;
-let data;  // This will store the fetched books data
+const booksPerPage = 50;
+let booksData = [];  // This will store the books data
 
 function loadBooks() {
-    if (!data) {
-        fetch('http://localhost/WEB_Projekat%20sa%20spappom/backend/scripts/get_all_books.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(fetchedData => {
-                data = fetchedData;
-                displayBooks();
-            })
-            .catch(error => console.error('Error loading book data:', error));
-    } else {
-        displayBooks();
-    }
+    const url = `backend/books/all?limit=${booksPerPage}&order=id`;
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authentication': `${localStorage.getItem('jwt-token')}`  
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+        }      
+        return response.json();
+    })
+    .then(books => {
+        booksData = books; // Store the fetched books in booksData
+        displayBooks(books);
+        setupInteractions();  // Ensure interactions are setup after books are displayed
+    })
+    .catch(error => console.error('Error loading book data:', error));
 }
 
-
-function displayBooks() {
+function displayBooks(books) {
     const productList = $('.grid-list');
-    // If data is an array, use it directly. Remove `data.books`.
-    const booksToLoad = data.slice(currentBookIndex, currentBookIndex + booksPerPage);
-    booksToLoad.forEach(book => {
-        const bookHTML = createBookHTML(book);
+    productList.empty(); // Clear previous books
+    books.forEach(book => {
+        const bookHTML = $(createBookHTML(book));
         productList.append(bookHTML);
     });
-    currentBookIndex += booksPerPage;
 }
-
 
 function createBookHTML(book) {
     return `
@@ -74,95 +66,99 @@ function createBookHTML(book) {
     `;
 }
 
-function setupInfiniteScrolling() {
-    $(window).on('scroll', function() {
-        if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-            loadBooks();
-        }
-    });
-}
-
 function setupInteractions() {
-    const modal = $("#bookDetailModal");
-    
-    // Interactions for each product card, delegate the event from the static parent
-    $(document).on('click', '.grid-list .action-btn', function(event) {
+    // Interaction setup to use global booksData array
+    $('.grid-list').on('click', '.action-btn[aria-label="quick view"]', function() {
         const bookId = $(this).data('book-id');
-        // Since `data` variable is an array now, we access it directly.
-        const book = data.find(b => b.id == bookId); // Ensure the type matches, == instead of ===
-
+        const book = booksData.find(b => b.id === bookId);
         if (book) {
-            if ($(this).attr('aria-label') === "quick view") {
-                showModal(book);
-            } else if ($(this).attr('aria-label') === "add to wishlist") {
-                addToWishlist(book);
-            }
-            // Add more interactions as needed
-        }
-    });
-    // Close the modal when the 'x' button is clicked
-    modal.find(".close").on('click', function() {
-        modal.hide();
-    });
-
-    // Close the modal when clicking outside of it
-    $(window).on('click', function(event) {
-        if ($(event.target).is(modal)) {
-            modal.hide();
+            showModal(book);
         }
     });
 
-    // Interactions for each product card
-    $(".grid-list").on('click', '.action-btn', function(event) {
+    // Add to favorites interaction
+    $('.grid-list').on('click', '.action-btn[aria-label="add to wishlist"]', function() {
         const bookId = $(this).data('book-id');
-        const book = data.books.find(b => b.id === bookId);
+        const userId = localStorage.getItem('user-id'); // Example: retrieving user ID from local storage
+        addToFavorites(userId, bookId);
+    });
 
-        if (book) {
-            if ($(this).attr('aria-label') === "quick view") {
-                showModal(book);
-            } else if ($(this).attr('aria-label') === "add to wishlist") {
-                addToWishlist(book);
-            }
-            // Add more interactions as needed
+    // Add to cart interaction
+    $('.grid-list').on('click', '.action-btn[aria-label="add to cart"]', function() {
+        const bookId = $(this).data('book-id');
+        addToCart(bookId);
+    });
+
+    $('#bookDetailModal .close').on('click', function() {
+        $('#bookDetailModal').hide();
+    });
+
+    $(document).on('click', function(event) {
+        if ($(event.target).is('#bookDetailModal, #bookDetailModal *')) {
+            $('#bookDetailModal').hide();
         }
     });
 }
 
-function showModal(book) { 
+function addToFavorites(userId, bookId) {
+    const url = 'backend/favorites/add-favorites';
+    console.log("Adding to favorites", { user_id: userId, book_id: bookId }); // Check the values being sent
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authentication': `${localStorage.getItem('jwt-token')}` // Assuming you store JWT in localStorage
+        },
+        body: JSON.stringify({ user_id: userId, book_id: bookId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.id) {
+            alert('Added to favorites successfully!'); // Success feedback
+        } else {
+            throw new Error('Failed to add to favorites');
+        }
+    })
+    .catch(error => {
+        console.error('Error adding to favorites:', error);
+        alert('Error adding to favorites.'); // Error feedback
+    });
+}
+
+function showModal(book) {
     const modal = $("#bookDetailModal");
-    // Update modal content with book details
-    modal.find(".modal-book-image").attr("src", book.image).attr("alt", book.title);
+    modal.find(".modal-book-image").attr("src", book.image);
     modal.find(".modal-book-title").text(book.title);
     modal.find(".modal-book-author").text(book.author);
     modal.find(".modal-book-price").text(`${book.price} BAM`);
     modal.find(".modal-book-description").text(book.description);
-
-    // Create stars HTML based on the book's integer star rating
-    let starsHtml = '';
-    for (let i = 0; i < book.stars; i++) {
-        starsHtml += '<ion-icon name="star"></ion-icon>';
-    }
-    for (let i = book.stars; i < 5; i++) {
-        starsHtml += '<ion-icon name="star-outline"></ion-icon>';
-    }
-    modal.find(".modal-book-stars").html(starsHtml);
-
-    // Show the modal
     modal.show();
 }
 
-function addToWishlist(book) {
-    const favoritePopup = $("#favoritePopup");
-    favoritePopup.text(`Added ${book.title} to favorites`).show();
-    setTimeout(() => {
-        favoritePopup.hide();
-    }, 2000);
-    // Implement the logic to actually add the book to the wishlist
-}
 
-// Ensure the document is ready before loading the books
-$(document).ready(function () {
-    if (window.location.hash === '#shop') {
-        $(document).trigger("shopPageLoaded");
-    }
-});
+function addToCart(bookId) {
+    const url = 'backend/add-to-cart';
+    const userId = localStorage.getItem('user-id'); // Retrieve user ID from local storage
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authentication': `${localStorage.getItem('jwt-token')}` // Assuming you store JWT in localStorage
+        },
+        body: JSON.stringify({ user_id: userId, book_id: bookId, quantity: 1 }) // Include user_id and quantity
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.data) {
+            alert('Added to cart successfully!'); // Success feedback
+        } else {
+            throw new Error('Failed to add to cart');
+        }
+    })
+    .catch(error => {
+        console.error('Error adding to cart:', error);
+        alert('Error adding to cart.'); // Error feedback
+    });
+}

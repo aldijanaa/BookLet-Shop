@@ -10,26 +10,13 @@
     <!-- - favicon  -->
     <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
 
-    <!-- - custom css link -->  <!--ove css sam stavila kroz route  -->
     <link rel="stylesheet" href="./assets/css/style.css">
-    <!--<link rel="stylesheet" href="./assets/css/about-us.css">-->
-    <!--<link rel="stylesheet" href="./assets/css/shop.css">-->
-    <!--<link rel="stylesheet" href="./assets/css/login.css">-->   <!--login css-->
-   <!--<link rel="stylesheet" href="./assets/css/cart.css">-->
-   <!--<link rel="stylesheet" href="./assets/css/checkout.css">   drugačija logika za ovo -->
 
-    <!--Za admina css-->
-    <!--<link rel="stylesheet" href="./assets/css/admin_style.css">-->
 
-    
     <!--google font Aldijana-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-   
-  <!-- preload images-->
-  <!--<link rel="preload" as="image" href="./assets/images/hero-bg.jpg">-->
 
 
   <!--JQUERY CSS Import (for SPApp)-->
@@ -57,19 +44,11 @@
           <button class="btn btn-primary" id="searchButton" >Search</button>
         </div>
 
-        <!--Cart icon action in header-->
+        <!--Cart icon action in header OVO BROJI KOLIKO IMA ITEMS U CARTU!!!-->
         <div class="header-action">
           <button class="header-action-btn" aria-label="cart" title="Cart" onclick="window.location.hash='#cart'">  <!--aria label mozda ovdje ne treba, provjeriti-->
             <span class="span">0</span>   <!--currently 0 element in cart-->
             <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon> <!--icon for cart-->
-          </button>
-
-
-       <!--<div class="header-action">
-          <button class="header-action-btn" aria-label="cart" title="favs" onclick="window.location.hash='#cart'"> 
-            <span class="span">0</span>  
-            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>-->
-         
           </button>
 
           <!--icon used for when in mobile view -->
@@ -77,16 +56,24 @@
             <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
           </button>
 
-          <!--User icon JEDINO OVAKO JE HTJELO-->
-          <div class="user-icon-container" > <!--id="dropdownContent"-->
-            <a href="#login" class="header-action-btn" title="User">
-              <ion-icon name="person-outline"></ion-icon>
-              <span class="login-text">Login</span>
-            </a>
+
+          <!-- User Icon with Dropdown Menu   -- novo  -->
+          <div class="user-icon-container">
+            <div class="header-action-btn" >
+                <ion-icon name="person-outline"></ion-icon>
+                <span class="login-text">Login</span>
+
+                <!--when logged in:-->
+                <div id="dropdownContent" class="dropdown-content" style="display:none;">
+                  <a href="#my-profile">My Profile</a>
+                    <a href="#view-favorites">View Favorites</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
           </div>
 
-        </div>
 
+        </div>
       </div>
     </div>
 
@@ -123,10 +110,7 @@
               <li>
                 <a href="#about-us" class="navbar-link">About Us</a>
               </li>
-              <!--<li>
-                <a href="#contact" class="navbar-link">Contact</a>
-              </li>-->
-  
+       
   
              
             </ul>  
@@ -145,7 +129,7 @@
   <section id="home" data-load="home.html"></section>
   <section id="shop" data-load="shop.html"></section>
   <section id="about-us" data-load="about-us.html"></section>
-  <section id="login" data-load="login.html"></section>
+  <section id="login-register" data-load="login-register.html"></section>
   <section id="cart" data-load="cart.html"></section>
   <section id="checkout" data-load="checkout.html"></section>
   <section id="thank-you" data-load="thank-you.html"></section>
@@ -200,8 +184,15 @@
 <script src="./assets/js/ajax/index_featured_collection_ajax.js"></script>
 <script src="./assets/js/ajax/index_ajax.js"></script>
 <script src="./assets/js/ajax/shop_ajax.js"></script>
-<script src="./assets/js/ajax/cart_ajax.js"></script>
-<!--<script src="./assets/js/ajax/register_login_ajax.js"></script>-->
+<!--<script src="./assets/js/ajax/cart_ajax.js"></script>-->
+
+<!--admin-->
+<script src="./assets/js/ajax/admin_add_book_ajax.js"></script>
+
+
+
+
+
 
 
 
@@ -209,10 +200,12 @@
 
   <!--Importing JS -->
   <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/shop.js"></script>
-  <script src="./assets/js/cart.js"></script>
+  <!--<script src="./assets/js/cart.js"></script>-->
   <script src="./assets/js/login-register.js"></script>
   <script src="./assets/js/search-button.js"></script>
+
+  <script src="./assets/js/auth.js"></script> <!--for logout-->
+
 
 
 
@@ -230,9 +223,11 @@
 $(function () {
     // Initialize SPApp
     var app = $.spapp({
-        defaultView: "home",
+        defaultView: "login-register",
         templateDir: "./views/",
-        pageNotFound: "error_404"
+        pageNotFound: "error_404",
+  
+
     });
 
       // Define what happens when 'home' view is loaded
@@ -258,20 +253,20 @@ $(function () {
       });
       // Define the route for 'login' and 'register' also hiding header and footer
       app.route({
-          view: "login",
-          load: "login.html",
+          view: "login-register",
+          load: "login-register.html",
           onCreate: function() {
               // Add 'login-page' class to body
-              $('head').append('<link rel="stylesheet" href="./assets/css/login.css" type="text/css" />');
+              $('head').append('<link rel="stylesheet" href="./assets/css/login-register.css" type="text/css" />');
               $('body').addClass('login-page');
-              $(document).trigger("registrationPageLoaded");
-
-              //$(document).trigger("registrationPageLoaded"); // Trigger the custom event when the login view is created
+              
+              $(document).trigger("loginFormLoaded"); // Custom event after form is loaded
+              $(document).trigger("registrationFormLoaded"); 
 
           },
           onUnload: function() {
-              // Remove 'login-page' class from body when navigating away from login
-              $('body').removeClass('login-page');
+              $('body').removeClass('login-page');    // Remove 'login-page' class from body when navigating away from login
+
           }
       });
 
@@ -303,6 +298,7 @@ $(function () {
             $('body').removeClass('admin-orders-page');
         }
     });
+
     // Define the route for 'admin-add-book' and hide header
     app.route({
         view: "admin-add-book",
@@ -317,6 +313,7 @@ $(function () {
             $('body').removeClass('admin-add-book-page');
         }
     });
+
     // Define the route for 'admin-users' and hide header
     app.route({
         view: "admin-users",

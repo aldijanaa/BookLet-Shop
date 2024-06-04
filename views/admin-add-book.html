@@ -1,15 +1,16 @@
 <main>
     <section class="add-products">
         <h1 class="title">ADD BOOKS</h1>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form id="addBookForm" method="post" enctype="multipart/form-data">
           <h3>Add Book</h3>
-          <input type="text" name="id" class="box" placeholder="Enter book id" required>
-          <input type="text" name="name" class="box" placeholder="Enter book name" required>
-          <input type="text" name="name" class="box" placeholder="Enter book author" required>
-          <input type="number" min="0" name="price" class="box" placeholder="Enter book price" required>
-          <input type="file" name="image" accept="image/jpg, image/jpeg, image/png" class="box" required>
-          <input type="submit" value="Add Book" name="add_product" class="btn-add">
+          <input type="text" name="book_id" class="box" placeholder="Enter book id" required>
+          <input type="text" name="book_name" class="box" placeholder="Enter book name" required>
+          <input type="text" name="book_author" class="box" placeholder="Enter book author" required>
+          <input type="number" min="0" name="book_price" class="box" placeholder="Enter book price" required>
+          <input type="file" name="book_image" accept="image/*" class="box" required>
+          <input type="submit" value="Add Book" class="btn-add">
         </form>
+        
       </section>
     
       <!-- SHOW PRODUCTS SECTION -->
