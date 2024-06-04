@@ -1,5 +1,11 @@
 <?php
 require_once __DIR__ . '/../services/UserService.class.php';
+require_once dirname(__FILE__) . "/../../config.php";
+
+
+
+use Firebase\JWT\JWT; // Import the JWT class
+use Firebase\JWT\Key;
 
 
 Flight::group('/auth', function () {   
@@ -107,37 +113,48 @@ Flight::group('/auth', function () {
 
 
 
-   
+    /**
+     * @OA\Post(
+     *     path="/auth/logout",
+     *     summary="Logs out the user",
+     *     tags={"Authentication"},
+     *     description="Invalidate the user's session by advising the client to delete the JWT.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully logged out"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized access"
+     *     )
+     * )
+     */
 
-     //We want user to be authenticated in order to trigger this logout route   --- ovo ne radi još
-    /*Flight::route('POST /logout', function() {
-        $data = Flight::request()->data->getData();  //getting payload data that has been sent through the request
-        $service = new UserService();
-
-        try{
-            $token = Flight::request()->getHeader('Authentication');
-            if(!$token){
-                throw new Exception("Token is missing");
-            }
-
-            $decoded_token = JWT::decode($token, new Key(JWT_SECRET_KEY . 'ss', 'HS256'));
-            Flight::json([
-                'jwt_decoded'=> $decoded_token,
-                'user'=>$decoded_token->user
-            ]);
-
-        }catch(\Exception $e){
-            Flight::halt(401, 'Invalid token');
+     
+     // Allow logout without token validation (token validation happens on client-side in most simple way)
+     Flight::route('POST /logout', function() {
+        $token = Flight::request()->getHeader('Authentication'); // Check the correct header key based on your client setup
+        
+        if(!$token) {
+            Flight::json(['message' => 'No token provided, nothing to logout.'], 400);
+            return;
         }
-    });*/
 
-    //Setting up a route to check if user is logged in
-    /*Flight::route('GET /auth/status', function() {
-        $service = new UserService();
+        try {
+            $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET_KEY(), 'HS256'));  // Optionally decode and log the logout if necessary:
+                // Log logout action  into a file
+            file_put_contents('logs.txt', 'User ' . $decoded_token->user->email . ' logged out at ' . date('Y-m-d H:i:s') . PHP_EOL, FILE_APPEND | LOCK_EX);
+    
+            // Respond to client to remove the token:
+            Flight::json(['message' => 'Logged out successfully. Please remove the token on the client side.'], 200);
+    
+        } catch (\Exception $e) {
+            Flight::halt(401, 'Unauthorized - ' . $e->getMessage());
+        }
+    });
 
-        $result = $service->checkLoginStatus();
-        Flight::json($result);
-    });*/
+
+
 
 
 });

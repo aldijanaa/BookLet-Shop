@@ -69,6 +69,8 @@ Flight::group('/favorites', function () {
         $service = new FavoritesService();
 
         $data = Flight::request()->data->getData(); 
+        error_log(print_r($data, true)); // This will log the data to your PHP error log
+
         
         // Check if user_id and book_id are set
         if (isset($data['user_id']) && isset($data['book_id'])) {

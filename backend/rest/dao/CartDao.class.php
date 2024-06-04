@@ -21,31 +21,30 @@ class CartDao extends BaseDao {
     }*/
 
     //miralemova verzija
-    public function add_to_cart($cart_item){
-
-        //check if the product is already in user's cart
+     // Add to cart method
+     public function add_to_cart($cart_item) {
+        // Check if the product is already in user's cart
         $existing_item = $this->query_unique("SELECT * FROM cart WHERE user_id = :user_id AND book_id = :book_id", [
-            "user_id" => $cart_item['user_id'], 
-            "book_id" => $cart_item['book_id']]);
-        
-        if($existing_item){
+            "user_id" => $cart_item['user_id'],
+            "book_id" => $cart_item['book_id']
+        ]);
 
-            //if product is already in use, update the quantity
-            $this->execute("UPDATE cart SET quantity = quantity + :quantity WHERE user_id = :user_id AND book_id =:book_id", [
+        if ($existing_item) {
+            // If product is already in use, update the quantity
+            $this->execute("UPDATE cart SET quantity = quantity + :quantity WHERE user_id = :user_id AND book_id = :book_id", [
+                "quantity" => $cart_item['quantity'],
                 "user_id" => $cart_item['user_id'],
-                "book_id" => $cart_item['book_id'],
+                "book_id" => $cart_item['book_id']
             ]);
             return $this->query_unique("SELECT * FROM cart WHERE id = :id", ["id" => $existing_item['id']]);
-        
-        }else{
-            //if product is not in user's cart, add it
-            $this->execute("INSERT INTO cart (user_id, book_id, quantity) VALUES (:user_id, :book_id, :quantity)",[
-                "user_id"=>$cart_item['user_id'],
-                "book_id"=>$cart_item['book_id'],
-                "quantity"=>$cart_item['quantity']
+        } else {
+            // If product is not in user's cart, add it
+            $this->execute("INSERT INTO cart (user_id, book_id, quantity) VALUES (:user_id, :book_id, :quantity)", [
+                "user_id" => $cart_item['user_id'],
+                "book_id" => $cart_item['book_id'],
+                "quantity" => $cart_item['quantity']
             ]);
-            return $this->query_unique("SELECT * FROM cart WHERE id = :id", ["id"=> $this->connection->lastInsertId()]);
-            //return $this->insert('cart', $cart_item);
+            return $this->query_unique("SELECT * FROM cart WHERE id = :id", ["id" => $this->connection->lastInsertId()]);
         }
     }
 

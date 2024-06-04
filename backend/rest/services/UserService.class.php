@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../dao/UserDao.class.php';
+require_once dirname(__FILE__) . "/../../config.php";
+
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -8,7 +10,7 @@ use Firebase\JWT\Key;
 session_start();  // Start the session at the beginning of the script
 
 class UserService {
-
+    
     private $user_dao; 
     
     public function __construct() {
@@ -144,7 +146,7 @@ class UserService {
             'role' => $user['role']
         ];
        
-        $jwt = JWT::encode($payload, JWT_SECRET_KEY, 'HS256');   //creating jwt token, HS256 is the algorithm used to encode the token
+        $jwt = JWT::encode($payload, Config::JWT_SECRET_KEY(), 'HS256');   //creating jwt token, HS256 is the algorithm used to encode the token
         
         // Store JWT in a session
         $_SESSION['jwt'] = $jwt;
@@ -154,7 +156,7 @@ class UserService {
 
 
     //Function to check if user is logged in
-    public function checkLoginStatus() {
+    /*public function checkLoginStatus() {
         //session_start(); // Ensure session start at the beginning of script if not already started
         
         if (isset($_SESSION['jwt'])) {
@@ -173,7 +175,7 @@ class UserService {
             }
         }
         return ['logged_in' => false];
-    }
+    }*/
 
 
     public function update_user($user_id, $user) {
@@ -193,7 +195,7 @@ class UserService {
         return $this->user_dao->get_user_by_email($email);
     }
 
-    
+
 
 
 }

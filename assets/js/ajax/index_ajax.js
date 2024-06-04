@@ -1,5 +1,5 @@
 /*Popular collection in home.html*/
-alert("Script execution started. Popular collection TEST!");
+//alert("Script execution started. Popular collection TEST!");
 
 $(document).ready(function() { //only will run after dom has been fully loaded  
     loadProducts(); // Load the products initially without filters
@@ -8,9 +8,9 @@ $(document).ready(function() { //only will run after dom has been fully loaded
 
 // Function to load all products without filtering
 function loadProducts() { 
-    const fileName = `./data/index_all_products.json`; 
-    fetch(fileName)
+    fetch( ` ./data/index_all_products.json`)
         .then(response => {
+
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
@@ -19,7 +19,7 @@ function loadProducts() {
         .then(data => {
             const productList = document.querySelector('.product-list.has-scrollbar');
             if (!productList) {
-                console.error("Product list element not found, retrying...");
+                //console.error("Product list element not found, retrying...");
                 return;
             }
             console.log('Product data loaded:', data);
@@ -27,7 +27,7 @@ function loadProducts() {
         })
         .catch(error => {
             console.error('Error loading product data:', error);
-            alert("Error rendering products: " + error.message);
+            //alert("Error rendering products: " + error.message);
         });
   }
   

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .  '/../../config.php';
+require_once dirname(__FILE__) . "/../../config.php";
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -8,7 +8,9 @@ Flight::route('/*', function() {   //$role = "USER" is default role for all rout
     // Token is not needed for login or register page, because these two routes are used to authorize the user and get the token
     if (
          strpos(Flight::request()->url, '/auth/login') === 0 ||
-         strpos(Flight::request()->url, '/auth/register') === 0
+         strpos(Flight::request()->url, '/auth/register') === 0 ||
+         strpos(Flight::request()->url, '/auth/logout') === 0  // Allow logout without token validation   -LOGOUT
+
     ){ 
         return TRUE;   //don't want to authenticate 
     } else {
@@ -19,7 +21,7 @@ Flight::route('/*', function() {   //$role = "USER" is default role for all rout
             if(!$token)
                 Flight::halt(401, "Unauthorized access. This will be reported to administrator!");
 
-            $decoded_token = JWT::decode($token, new Key(JWT_SECRET_KEY, 'HS256')); //JWT_SECRET_KEY is defined in config.php
+            $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET_KEY(), 'HS256')); //JWT_SECRET_KEY is defined in config.php
 
             
             Flight::set('user', $decoded_token->user);
